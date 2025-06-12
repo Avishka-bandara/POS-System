@@ -1,0 +1,39 @@
+$primary: #4e73df;
+$secondary: #858796;
+$success: #1cc88a;
+$danger: #e74a3b;
+$warning: #f6c23e;
+$info: #36b9cc;
+
+body {
+    font-family: 'Nunito', sans-serif;
+}
+
+.sidebar {
+    .nav-item {
+        .nav-link {
+            &.active {
+                background-color: rgba(255, 255, 255, 0.2);
+            }
+        }
+    }
+}
+
+.card {
+    border: none;
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+}
+
+.btn-primary {
+    background-color: $primary;
+    border-color: $primary;
+    &:hover {
+        background-color: darken($primary, 10%);
+        border-color: darken($primary, 10%);
+    }
+}
+
+.low-stock {
+    color: $danger;
+    font-weight: bold;
+}
