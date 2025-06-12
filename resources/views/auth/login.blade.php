@@ -11,7 +11,8 @@
 
     <title>SB Admin 2 - Login</title>
 
-    @vite(['resources/css/sb-admin-2.css'])
+    @vite(['resources/css/sb-admin-2.css',
+           'resources/css/custom.scss'])
     @vite(['resources/js/sb-admin-2.js'])
 
 

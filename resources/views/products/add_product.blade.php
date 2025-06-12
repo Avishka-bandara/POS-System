@@ -1,8 +1,8 @@
 @extends('layouts.layouts')
 
-@section('title', 'Dashboard')
+@section('title', 'Add Product')
 
 @section('content')
-    
-@endsection
 
+
+@endsection
