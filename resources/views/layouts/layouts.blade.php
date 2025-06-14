@@ -36,25 +36,22 @@
                 </div>
                 <div class="sidebar-brand-text mx-3">Grocery shop</div>
             </a>
-            <!-- Divider -->
+            
             <hr class="sidebar-divider my-0">
-            <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
                 <a class="nav-link" >
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
-            <!-- Divider -->
             <hr class="sidebar-divider">
 
-            <!-- Heading -->
             <div class="sidebar-heading">
                 POS Management
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                <a class="nav-link collapsed" href="{{route('sales.index')}}" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>POS</span>
@@ -62,12 +59,11 @@
             </li>
 
             <hr class="sidebar-divider">
-            <!-- Heading -->
             <div class="sidebar-heading">
                 Stock Management
             </div>
 
-            <!-- Nav Item - Pages Collapse Menu -->
+            
             <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="collapse" data-bs-target="#collapsePages"
                     aria-expanded="true" aria-controls="collapsePages">
