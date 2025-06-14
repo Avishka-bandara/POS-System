@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SalesController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -22,5 +23,13 @@ require __DIR__.'/auth.php';
 
 
 
-Route::get('/product/view',[ProductController::class, 'index'])->name('product.index');
+Route::get('/product/view-product',[ProductController::class, 'index'])->name('product.index');
 Route::get('/product/add-product',[ProductController::class, 'addProduct'])->name('product.add_product');
+
+
+
+
+
+
+
+Route::get('POS/Sales', [SalesController::class, 'index'])->name('sales.index');
