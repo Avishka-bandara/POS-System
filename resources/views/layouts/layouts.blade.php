@@ -78,7 +78,7 @@
                 </div>
             </li>
 
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="collapse" data-bs-target="#products"
                     aria-expanded="false" aria-controls="products">
                     <i class="fas fa-fw fa-folder"></i>
@@ -91,7 +91,7 @@
                         <a class="collapse-item" >Add Catergory</a>
                     </div>
                 </div>
-            </li>
+            </li> --}}
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -109,8 +109,8 @@
                 </a>
                 <div id="profile" class="collapse">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" >Permission</a>
-                        <a class="collapse-item" ></a>
+                        <a class="collapse-item" href="{{route('profile.edit')}}" >Permission</a>
+                        
                     </div>
                 </div>
             </li>

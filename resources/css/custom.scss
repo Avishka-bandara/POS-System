@@ -39,3 +39,27 @@ body {
     color: $danger;
     font-weight: bold;
 }
+
+
+.btn-group{
+    .btn {      
+            background-color: $primary;
+            border-color: $primary;
+        
+    }
+    .btn:hover {
+        background-color: darken($primary, 10%);
+        border-color: darken($primary, 20%);
+        // box-shadow: 0 0.15rem 1.75rem 0 rgba(9, 175, 9, 0.9);
+    }
+}
+
+.nav-item{
+    &:hover{
+        cursor: pointer;
+        background-color: rgba(35, 33, 33, 0.1);
+        .nav-link {
+            color: $primary;
+        }
+    }
+}
