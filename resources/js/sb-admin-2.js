@@ -1,5 +1,9 @@
+import $ from 'jquery';
+window.$ = window.jQuery = $;
 (function($) {
   "use strict"; // Start of use strict
+
+
 
   // Toggle the side navigation
   $("#sidebarToggle, #sidebarToggleTop").on('click', function(e) {

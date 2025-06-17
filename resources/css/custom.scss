@@ -1,3 +1,5 @@
+@import '@fortawesome/fontawesome-free/css/all.min.css';
+
 
 $primary: #4e73df;
 $secondary: #858796;
@@ -8,6 +10,7 @@ $info: #36b9cc;
 
 body {
     font-family: 'Nunito', sans-serif;
+
 }
 
 .sidebar {
@@ -57,9 +60,40 @@ body {
 .nav-item{
     &:hover{
         cursor: pointer;
-        background-color: rgba(35, 33, 33, 0.1);
+        // background-color: rgba(189, 21, 21, 0.9);
         .nav-link {
             color: $primary;
         }
     }
+}
+
+
+.offcanvas-header{
+    h5{
+        color: white;
+    }
+    
+    background-color:$primary;
+}
+
+#profile,#product{
+    &:hover{
+        color: white;
+    }
+    .collapse-item{
+        color: white;
+        &:hover{
+            color: $primary;
+            
+        }
+        
+    }
+}
+
+.table-hover tbody tr:hover {
+    td{
+        color: white !important;
+        background-color: rgba(13, 110, 253, 0.9);;
+    }
+   
 }
