@@ -3,39 +3,21 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
     use HasFactory;
-
+    
+    protected $table = 'products';
     protected $fillable = [
-        'category_id',
         'name',
-        'description',
+        'size',
+        'brand',
         'price',
+        'category',
         'quantity',
-        'warning_level',
-        'image',
-        'barcode',
+        'exp_date',
     ];
 
-    public function category()
-    {
-        return $this->belongsTo(Category::class);
-    }
-
-    public function saleItems()
-    {
-        return $this->hasMany(SaleItem::class);
-    }
-
-    public function stockUpdates()
-    {
-        return $this->hasMany(StockUpdate::class);
-    }
-
-    public function isLowStock()
-    {
-        return $this->quantity <= $this->warning_level;
-    }
 }

@@ -18,7 +18,7 @@
                 <div class="card shadow">
                     <div class="card-body">
 
-                        <form action="#" method="POST">
+                        <form action="{{ route('product.add_new_product_save') }}" method="POST">
                             @csrf
                             <div class="row mb-3">
                                 <div class="col-md-6">
@@ -81,19 +81,32 @@
                                     @enderror
                                 </div>
                             </div>
+                             <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="category" class="form-label">Category</label>
+                                <input type="text"
+                                    class="form-control @error('category') is-invalid @enderror" id="category" name="category"
+                                    value="{{ old('category') }}" required>
+                                @error('category')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            </div>
 
-                            <div class="btn-group mb-3">
-                                <a class="btn btn-secondary dropdown-toggle" href="#" role="button"
+
+                            {{-- <div class="btn-group  col-md-4">
+                                
+                               <a class="btn btn-secondary dropdown-toggle" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     Dropdown link
                                 </a>
 
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Action</a></li>
-                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                    <button class="dropdown-item" type="button" value="action">Action</button>
+                                    <button class="dropdown-item" type="button" value="another_action">Another action</button>
+                                    <button class="dropdown-item" type="button" value="something_else">Something else here</button>
                                 </ul>
-                            </div>
+                           </div> --}}
 
                             <div class="text-end mt-5">
                                 <button type="submit" class="btn btn-success col-3">
