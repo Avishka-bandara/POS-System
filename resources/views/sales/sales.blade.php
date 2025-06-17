@@ -5,7 +5,7 @@
 
 @section('content')
 
-    @vite(['resources/css/sales.css'])
+    @vite(['resources/css/sales.css', 'resources/css/custom.scss'])
     @vite(['resources/js/sales/sales.js'])
 
 
@@ -16,8 +16,8 @@
         <form action="#" method="POST" id="productForm">
         <div class="row g-3 align-items-end px-3" style="display: flex; justify-content: space-between;">
             <div class="col-md-4">
-                <label for="product" class="form-label">Select Product</label>
-                <input class="form-control" list="productList" id="product" name="product" placeholder="Type to search..." style="box-shadow: none;">
+                <label for="productItem" class="form-label">Select Product</label>
+                <input class="form-control" list="productList" id="productItem" name="product" placeholder="Type to search..." style="box-shadow: none;">
                 <datalist id="productList">
                     {{-- @foreach ($products as $product)
                         <option
@@ -40,7 +40,7 @@
         <div class="card shadow mb-4 mt-3">
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered">
+                    <table class="table ">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -64,7 +64,7 @@
                         </tbody>
                         <tfoot class="table-light">
                             <tr>
-                                <th colspan="4" class="text-end">Grand Total:</th>
+                                <th colspan="5" class="text-end">Grand Total:</th>
                                 <th>$20.00</th>
                                 <th></th>
                             </tr>
