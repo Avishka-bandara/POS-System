@@ -4,10 +4,20 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <title>{{ config('app.name', 'POS System') }} - @yield('title')</title>
 
-    @vite(['resources/css/sb-admin-2.css', 'resources/css/custom.scss'])
-    @vite(['resources/js/sb-admin-2.js', 'resources/js/app.js'])
+    @vite([
+        'resources/css/sb-admin-2.css',
+        'resources/css/custom.scss',
+        'resources/css/toast.scss',
+
+    ])
+    @vite([
+        'resources/js/sb-admin-2.js',
+        'resources/js/app.js'
+    ])
 
 </head>
 
@@ -57,6 +67,7 @@
                     <div class="py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{ route('product.index') }}">View Product</a>
                         <a class="collapse-item" href="{{ route('product.add_product') }}">Add Product</a>
+                        <a class="collapse-item" href="{{ route('product.category') }}">Category</a>
                     </div>
                 </div>
             </li>

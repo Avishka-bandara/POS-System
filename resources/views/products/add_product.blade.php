@@ -2,7 +2,14 @@
 
 @section('title', 'Add Product')
 
+
 @section('content')
+@vite([ 
+    'resources/css/custom.scss',
+    'resources/js/product/add-product.js'
+])
+
+
 
     <div class="container pt-4 col-lg-10 col-md-10 col-sm-6">
         <div class="row mb-4 pt-4">
@@ -10,15 +17,15 @@
                 <h1 class="h3">Add New Product</h1>
             </div>
         </div>
-        @if (session('success'))
+        {{-- @if (session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
-        @endif
+        @endif --}}
         <div class="row justify-content-center">
             <div class="col-lg-12 col-md-10 col-sm-6">
                 <div class="card shadow">
                     <div class="card-body">
 
-                        <form action="{{ route('product.add_new_product_save') }}" method="POST">
+                        <form action="{{ route('product.add_new_product_save') }}" method="POST" id="addProductForm">
                             @csrf
                             <div class="row mb-3">
                                 <div class="col-md-6">
@@ -31,9 +38,9 @@
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label for="brand" class="form-label">Brand</label>
+                                    <label for="brand" class="form-label">Seller</label>
                                     <input type="text" class="form-control @error('brand') is-invalid @enderror"
-                                        id="brand" name="brand" value="{{ old('brand') }}" required>
+                                        id="brand" name="brand" value="{{ old('brand') }}" >
                                     @error('brand')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -81,16 +88,15 @@
                                     @enderror
                                 </div>
                             </div>
-                             <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label for="category" class="form-label">Category</label>
-                                <input type="text"
-                                    class="form-control @error('category') is-invalid @enderror" id="category" name="category"
-                                    value="{{ old('category') }}" required>
-                                @error('category')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="category" class="form-label">Category</label>
+                                    <input type="text" class="form-control @error('category') is-invalid @enderror"
+                                        id="category" name="category" value="{{ old('category') }}" required>
+                                    @error('category')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
                             </div>
 
 

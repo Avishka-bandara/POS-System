@@ -3,6 +3,11 @@
 @section('title', 'View Product')
 
 @section('content')
+
+@vite([
+    'resources/js/product/edit-product.js',
+    'resources/css/custom.scss',
+])
     <div class="container pt-4 col-lg-10 col-md-10 col-sm-6">
         <div class="row mb-4 pt-4">
             <div class="col-lg-12 col-md-10 col-sm-6">
@@ -14,26 +19,12 @@
                 <div class="card shadow">
                     <div class="card-body">
 
-                        <form action="#" method="POST">
+                        <form action="{{ url('/api/edit-product') }}" method="POST" id="searchProductForm">
                             @csrf
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                     <label for="productName" class="form-label">Product Name</label>
-                                    <input type="text" class="form-control @error('productName') is-invalid @enderror"
-                                        id="productName" name="productName" value="{{ old('productName') }}" required>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <label for="brand" class="form-label">Brand</label>
-                                    <input type="text" class="form-control @error('brand') is-invalid @enderror"
-                                        id="brand" name="brand" value="{{ old('brand') }}" required>
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <label for="product" class="form-label">Select Product</label>
-                                    <input class="form-control" list="productList" id="product" name="product"
-                                        placeholder="Type to search..." style="box-shadow: none;">
+                                    <input type="text" class="form-control" list="productList" id="productName" placeholder="Type to search..." name="productName">
                                     <datalist id="productList">
                                         {{-- @foreach ($products as $product)
                                             <option value="{{ $product->name }} ({{ $product->brand }}) - ${{ number_format($product->price, 2) }}">
@@ -41,11 +32,29 @@
                                     </datalist>
                                 </div>
 
+                                <div class="col-md-6">
+                                    <label for="brand" class="form-label">Brand</label>
+                                    <input type="text" class="form-control @error('brand') is-invalid @enderror"
+                                        id="brand" name="brand"  required>
+                                </div>
                             </div>
+                            {{-- <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="product" class="form-label">Select Product</label>
+                                    <input class="form-control" list="productList" id="product" name="product"
+                                        placeholder="Type to search..." style="box-shadow: none;">
+                                    <datalist id="productList">
+                                        {{-- @foreach ($products as $product)
+                                            <option value="{{ $product->name }} ({{ $product->brand }}) - ${{ number_format($product->price, 2) }}">
+                                        @endforeach 
+                                    </datalist>
+                                </div>
+
+                            </div> --}}
 
 
 
-                            <div class="text-end mt-5">
+                            <div class="text-start mt-5">
                                 <button type="submit" class="btn btn-success col-3">
                                     <i class="fas fa-plus-circle me-1"></i> Search
                                 </button>
