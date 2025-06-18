@@ -13,3 +13,5 @@ Route::get('/user', function (Request $request) {
 Route::post ('/edit-product',[ProductController::class,'editProducts'])->name('edit.product');
 Route::post('/add-category-save', [ProductController::class, 'addCategorySave'])->name('add.category.save');
 Route::get('/fetch-categories', [ProductController::class, 'fetchCategories'])->name('fetch.categories');
+Route::post('/update-category', [ProductController::class, 'updateCategory'])->name('update.category');
+Route::post('/delete-category/{id}', [ProductController::class, 'deleteCategory'])->name('delete.category');

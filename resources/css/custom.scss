@@ -1,5 +1,7 @@
 @import '@fortawesome/fontawesome-free/css/all.min.css';
-@import 'toastr/build/toastr.min.css';
+@import 'bootstrap/scss/bootstrap';
+
+
 
 
 
@@ -98,3 +100,22 @@ body {
     }
    
 }
+
+#accordionSidebar{
+
+    #shopName {
+        justify-content: start;
+        position: fixed;
+       
+    }
+    #componentName{
+        justify-content: center;
+        position: fixed;
+        margin-top: 8rem;
+    }
+    
+  
+}
+
+
+

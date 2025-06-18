@@ -6,7 +6,8 @@
 @section('content')
 @vite([ 
     'resources/css/custom.scss',
-    'resources/js/product/add-product.js'
+    'resources/js/product/add-product.js',
+    'resources/css/toast.scss'
 ])
 
 

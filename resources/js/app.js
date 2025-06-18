@@ -1,4 +1,5 @@
 import './bootstrap';
+import toastr from 'toastr';
 
 
 
@@ -11,6 +12,17 @@ Alpine.start();
 
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
+
+toastr.options = {
+            "closeButton": true,
+            "progressBar": true,
+            "showMethod": "fadeIn",
+            "positionClass": "toast-top-right", 
+            "timeOut": "3000"
+        };
+
+
 
 
 
