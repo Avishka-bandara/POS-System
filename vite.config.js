@@ -16,6 +16,9 @@ export default defineConfig({
       '~': '/node_modules/',
     },
   },
+   optimizeDeps: {
+    include: ['toastr']
+  }
 });
 
 

@@ -27,6 +27,7 @@ require __DIR__.'/auth.php';
 
 Route::get('/product/view-product',[ProductController::class, 'index'])->name('product.index');
 Route::get('/product/add-product',[ProductController::class, 'addProduct'])->name('product.add_product');
+Route::get('/product/add-catergory',[ProductController::class, 'addCategory'])->name('product.category');
 Route::post('/product/add-product-save',[ProductController::class, 'addNewProductSave'])->name('product.add_new_product_save');
 
 
