@@ -12,13 +12,14 @@ class ProductController extends Controller
 {
     public function index()
     {
-        // Logic to retrieve and display products
-        return view('products.view_product');
+        $products = Product::all();
+        return view('products.view_product',['products' => $products]);
     }
 
     public function addProduct()
     {
-        return view('products.add_product');
+        $categories = Category::select('id', 'name')->get();
+        return view ('products.add_product', ['categories' => $categories]);
     }
 
     public function addCategory(){
@@ -68,26 +69,30 @@ class ProductController extends Controller
     }
 
 
+    
+
+
     public function addNewProductSave(Request $request)
     {
     //    dd($request->all());
     
-    Product::create([
-        'name' => $request->input('productName'),
-        'brand' => $request->input('brand'),
-        'size' => $request->input('size'),
-        'quantity' => $request->input('quantity'),
-        'exp_date' => $request->input('expiryDate'),
-        'price' => $request->input('price'),
-        'category' => $request->input('category'),
-    ]);
+        Product::create([
+            'name' => $request->input('productName'),
+            'brand' => $request->input('brand'),
+            'size' => $request->input('size'),
+            'quantity' => $request->input('quantity'),
+            'exp_date' => $request->input('expiryDate'),
+            'price' => $request->input('price'),
+            'category_id' => $request->input('category_id'),
+        ]);
 
-    return response()->json(['success' => 'Product added successfully.']);
+        return response()->json(['success' => 'Product added successfully.']);
     }
 
 
     public function editProducts(Request $request)
     {
+        // $productDetail= Product::
         return response()->json([
             'success' => true,
             'message' => 'Search completed successfully.',

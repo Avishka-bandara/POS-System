@@ -19,23 +19,31 @@
                 <div class="card shadow">
                     <div class="card-body">
 
-                        <form action="{{ url('/api/edit-product') }}" method="POST" id="searchProductForm">
+                        <form action="{{ url('/api/edit-product') }}" method="POST" id="editProductForm">
                             @csrf
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                     <label for="productName" class="form-label">Product Name</label>
-                                    <input type="text" class="form-control" list="productList" id="productName" placeholder="Type to search..." name="productName">
-                                    <datalist id="productList">
-                                        {{-- @foreach ($products as $product)
-                                            <option value="{{ $product->name }} ({{ $product->brand }}) - ${{ number_format($product->price, 2) }}">
-                                        @endforeach --}}
-                                    </datalist>
+                                    <select type="text" class="form-control" id="productName" placeholder="Type to search..." name="productName">
+                                        <option value="" disabled selected>Select Product</option>
+                                        @foreach ($products as $product)
+                                            <option value="{{ $product->id }}">
+                                                {{ $product->name }}  
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label for="brand" class="form-label">Brand</label>
-                                    <input type="text" class="form-control @error('brand') is-invalid @enderror"
-                                        id="brand" name="brand"  required>
+                                    <label for="brandName" class="form-label">Brand Name</label>
+                                    <select type="text" class="form-control" id="brandName" placeholder="Type to search..." name="brandName">
+                                        <option value="" disabled selected>Brand</option>
+                                        @foreach ($products as $product)
+                                            <option value="{{ $product->id }}">
+                                                {{ $product->brand }}  
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             {{-- <div class="row mb-3">

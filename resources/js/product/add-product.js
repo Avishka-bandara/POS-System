@@ -3,13 +3,15 @@ import toastr from 'toastr';
 
 
 
+
 $(document).ready(function(){
     $('#addProductForm').on('submit', function(e){
         e.preventDefault(); 
 
         const formData = $(this);
         const url = formData.attr('action');
-
+        // console.log(formData.serialize());
+        
         $.ajax({
             type: 'POST',
             url: url,
@@ -26,13 +28,14 @@ $(document).ready(function(){
                     toastr.error(response.message || 'An error occurred');
                 }
             },
-            error: function(){
-                toastr.error('An error occurred while processing your request.');
+            error: function(xhr){
+                // console.error(xhr.responseText);
+                toastr.error( 'An error occurred while processing your request.');
             }
 
         })
     })
-})
+});
 
 toastr.options = {
         "closeButton": true,
@@ -41,4 +44,8 @@ toastr.options = {
         "positionClass": "toast-top-right", // top-right, top-left, bottom-right etc.
         "timeOut": "3000"
     };
+
+
+   
+
 

@@ -1,14 +1,16 @@
 import $ from 'jquery';
 
 $(document).ready(function() {
-    $(document).on('submit', '#editProductForm', (e)=>{
+    $('#editProductForm').on('submit', function(e) {
     e.preventDefault(); 
 
     const formData = $(this);
     const url = formData.attr('action');  
+    console.log(formData.serialize());
+    
     
     $.ajax({
-        method:'POST',
+        type:'POST',
         url: url,
         data: formData.serialize(),
         headers: {
