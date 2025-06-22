@@ -1,5 +1,6 @@
 import './bootstrap';
 import toastr from 'toastr';
+import flatpickr from "flatpickr";
 
 
 
@@ -23,6 +24,16 @@ toastr.options = {
         };
 
 
+
+document.addEventListener("DOMContentLoaded", function () {
+    flatpickr("#expiryDate", {
+        dateFormat: "Y-m-d",
+        altInput: true,
+        altFormat: "F j, Y",
+        allowInput: true,
+        disableMobile: "true"
+    });
+});
 
 
 
