@@ -92,11 +92,15 @@ class ProductController extends Controller
 
     public function editProducts(Request $request)
     {
-        // $productDetail= Product::
+        $productName = $request->input('productName');
+        $brand = $request->input('brandName');
+        $productDetail = Product::where('name', 'like', '%' . $productName . '%')
+            ->where('brand', 'like', '%' . $brand . '%')
+            ->get();
+            
         return response()->json([
-            'success' => true,
             'message' => 'Search completed successfully.',
-            'data' => $request->all()
+            'data' => $productDetail
         ]);
     }
 }
