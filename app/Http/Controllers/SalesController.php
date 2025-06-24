@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 class SalesController extends Controller
 {
     public function index(){
-        return view('sales.sales');
+        $products = \App\Models\Product::all();
+        return view('sales.sales')->with('products', $products);
     }
 }
