@@ -11,23 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('Product_brand', function (Blueprint $table) {
+        Schema::create('sales', function (Blueprint $table) {
             $table->id();
-            $table->string('brand_name');
+            $table->String('grand_total');
             $table->timestamps();
         });
-        schema::table('products', function (Blueprint $table) {
-            $table->dropColumn('brand');
-            $table->foreignId('brand_id')->constrained('Product_brand')->onDelete('cascade')->nullable();
-        });            
-        }
-    
+    }
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('table_brand_name');
+        Schema::dropIfExists('sales');
     }
 };

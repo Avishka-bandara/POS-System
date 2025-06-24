@@ -25,10 +25,10 @@
                                 <div class="col-md-6">
                                     <label for="productName" class="form-label">Product Name</label>
                                     <select type="text" class="form-control" id="productName" placeholder="Type to search..." name="productName">
-                                        <option value="" disabled selected>Select Product</option>
+                                        <option  disabled selected>Select Product</option>
                                         @foreach ($products as $product)
-                                            <option value="{{ $product->id }}">
-                                                {{ $product->name }}  
+                                            <option value="{{ $product->name }}">
+                                                {{ $product->name }} -  {{ $product->category->name}} - {{ $product->size}}
                                             </option>
                                         @endforeach
                                     </select>
@@ -37,9 +37,9 @@
                                 <div class="col-md-6">
                                     <label for="brandName" class="form-label">Brand Name</label>
                                     <select type="text" class="form-control" id="brandName" placeholder="Type to search..." name="brandName">
-                                        <option value="" disabled selected>Brand</option>
+                                        <option  disabled selected>Brand</option>
                                         @foreach ($products as $product)
-                                            <option value="{{ $product->id }}">
+                                            <option value="{{ $product->brand }}">
                                                 {{ $product->brand }}  
                                             </option>
                                         @endforeach

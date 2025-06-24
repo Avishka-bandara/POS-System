@@ -5,31 +5,30 @@
 
 @section('content')
 
-    @vite(['resources/css/sales.css', 'resources/css/custom.scss'])
-    @vite(['resources/js/sales/sales.js, resources/js/app.js'])
+    @vite([ 'resources/css/custom.scss'])
+    @vite(['resources/js/sales/sales.js', 'resources/js/app.js'])
 
 
     <div class="container pt-4 col-lg-10 col-md-10 col-sm-6">
         <h4 class="mb-4">New Bill</h4>
 
         <!-- Product Selection Row -->
-        <form action="#" method="POST" id="productForm">
+        <form action="{{url('api/check-quantity')}}" method="POST" id="productForm">
             <div class="row g-3 align-items-end px-3 mb-5" style="display: flex; justify-content: space-between;">
                 <div class="col-md-4">
                     <label for="productItem" class="form-label">Select Product</label>
-                    <input class="form-control" list="productList" id="productItem" name="product"
+                    <select class="form-control"  id="productItem" name="product"
                         placeholder="Type to search..." style="box-shadow: none;">
-                    <datalist id="productList">
-                        {{-- @foreach ($products as $product)
-                        <option
-                            value="{{ $product->name }} ({{ $product->brand }}) - ${{ number_format($product->price, 2) }}">
-                    @endforeach --}}
-                    </datalist>
+                        <option value="" selected disabled>Select a product</option>
+                        @foreach ($products as $product)
+                            <option value="{{ $product->id }}">{{ $product->name }} - {{ $product->category->name }} - LKR({{ $product->price }})</option>
+                        @endforeach
+                    </select>
                 </div>
 
                 <div class="col-md-3">
                     <label for="quantity" class="form-label">Qty</label>
-                    <input type="number" class="form-control" id="quantity" name="quantity" min="1" value="1">
+                    <input type="number" class="form-control" id="quantity" name="quantity" min="1" value="" required>
                 </div>
 
                 <div class="col-md-2">
@@ -82,6 +81,4 @@
             </button>
         </div>
     </div>
-
-
 @endsection

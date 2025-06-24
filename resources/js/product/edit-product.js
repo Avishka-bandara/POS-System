@@ -10,7 +10,7 @@ $(document).ready(function() {
     
     
     $.ajax({
-        type:'POST',
+        type:'GET',
         url: url,
         data: formData.serialize(),
         headers: {
@@ -19,6 +19,8 @@ $(document).ready(function() {
         success: function (response) {
                 console.log('Success:', response);
                 // You can now display a success message or update the DOM
+                console.log('Product updated successfully:', response);
+                
         },
         error: function (xhr, status, error) {
                 console.error('Error:', error);
