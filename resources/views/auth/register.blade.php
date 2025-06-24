@@ -60,8 +60,8 @@
                                                 placeholder="Email" name="email" required>
                                         </div>
                                         <div class="form-group">
-                                            <input type="number" class="form-control form-control-user" id="phone_number"
-                                                placeholder="Contact Number" name="phone_number" required>
+                                            <input type="text" class="form-control form-control-user" id="phone_number"
+                                                placeholder="Contact Number" maxlength="10" name="phone_number" required>
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-sm-6 mb-3 mb-sm-0">
