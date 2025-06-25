@@ -124,14 +124,14 @@
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
         </div>
         <div class="offcanvas-body">
-            <form id="editCategoryForm" method="POST" action="{{url('/api/update-category')}}">
+            <form id="editCategoryForm" method="POST" action="#">
                 @csrf
-                <input type="hidden" name="id" id="CategoryId">
+                {{-- <input type="hidden" name="id" id="CategoryId">
                 <div class="mb-3">
                     <label for="CategoryName" class="form-label">Category Name</label>
                     <input type="text" class="form-control" id="CategoryName" name="CategoryName" required>
                 </div>
-                <button type="submit" class="btn btn-success" data-bs-dismiss="offcanvas" aria-label="Close">Update</button>
+                <button type="submit" class="btn btn-success" data-bs-dismiss="offcanvas" aria-label="Close">Update</button> --}}
             </form>
         </div>
     </div>
