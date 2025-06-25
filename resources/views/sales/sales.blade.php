@@ -17,18 +17,21 @@
         <div class="row g-3 align-items-end px-3 mb-5" style="display: flex; justify-content: space-between;">
             <div class="col-md-4">
                 <label for="productItem" class="form-label">Select Product</label>
-                <select class="form-control" id="productItem" name="product"
-                    placeholder="Type to search..." style="box-shadow: none;">
+                <select class="form-control" id="productItem" name="product" style="box-shadow: none;">
                     <option value="" selected disabled>Select a product</option>
                     @foreach ($products as $product)
-                    <option value="{{ $product->id }}">{{ $product->name }} - {{ $product->category->name }} - LKR({{ $product->price }})</option>
+                    <option value="{{ $product->id }}"
+                        data-stock="{{ $product->quantity }}">
+                        {{ $product->name }} - {{ $product->category->name }} - LKR({{ $product->price }})
+                    </option>
                     @endforeach
                 </select>
+
             </div>
 
             <div class="col-md-3">
                 <label for="quantity" class="form-label">Qty</label>
-                <input type="number" class="form-control" id="quantity" name="quantity" min="1" value="" required>
+                <input type="number" class="form-control" id="quantity" name="quantity" min="1" required>
             </div>
 
             <div class="col-md-2">
@@ -72,5 +75,8 @@
             <i class="fas fa-print me-1"></i> Print Bill
         </button>
     </div>
+    
 </div>
+
+
 @endsection

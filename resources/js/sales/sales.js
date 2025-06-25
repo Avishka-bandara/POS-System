@@ -166,3 +166,27 @@ function printBill() {
     printWindow.focus();
     printWindow.print();
 }
+
+const productSelect = document.getElementById('productItem');
+const quantityInput = document.getElementById('quantity');
+
+productSelect.addEventListener('change', function () {
+    console.log('Product selected:', this.value);
+    const selectedOption = this.options[this.selectedIndex];
+    const maxStock = selectedOption.getAttribute('data-stock');
+
+    if (maxStock) {
+        console.log('Max stock:', maxStock);
+        quantityInput.setAttribute('max', maxStock);
+    }
+});
+
+quantityInput.addEventListener('input', function () {
+    const max = parseInt(this.getAttribute('max'));
+    const val = parseInt(this.value);
+
+    if (val === max) {
+        this.value = max;
+        toastr.info(`You have reached the maximum quantity of ${max}.`);
+    } 
+});
