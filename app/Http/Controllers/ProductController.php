@@ -12,8 +12,21 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::all();
-        return view('products.view_product',['products' => $products]);
+        $products = Product::with('category')->get();
+
+        // Get only distinct product names
+        $uniqueProductNames = Product::select('name', 'category_id')
+            ->groupBy('name', 'category_id')
+            ->get();
+
+        // Get only distinct brand names
+        $uniqueBrandNames = Product::select('brand')->distinct()->get();
+
+        return view('products.view_product', [
+            'products' => $products,
+            'uniqueProductNames' => $uniqueProductNames,
+            'uniqueBrandNames' => $uniqueBrandNames,
+        ]);
     }
 
     public function addProduct()
@@ -94,13 +107,16 @@ class ProductController extends Controller
     {
         $productName = $request->input('productName');
         $brand = $request->input('brandName');
-        $productDetail = Product::where('name', 'like', '%' . $productName . '%')
+        
+        $productDetail = Product::with('category')
+            ->where('name', 'like', '%' . $productName . '%')
             ->where('brand', 'like', '%' . $brand . '%')
             ->get();
-            
+
+
         return response()->json([
             'message' => 'Search completed successfully.',
-            'data' => $productDetail
+            'data' => $productDetail 
         ]);
     }
 }
