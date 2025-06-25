@@ -28,7 +28,7 @@
 
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" >
+            <a class="sidebar-brand d-flex align-items-center justify-content-center">
                 <div class="sidebar-brand-icon rotate-n-15">
                     {{-- <i class="fas fa-laugh-wink"></i> --}}
                 </div>
@@ -37,8 +37,8 @@
 
             <hr class="sidebar-divider my-0">
             <div id="componentName">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">
+                <li class="nav-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('dashboard') }}">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span>
                     </a>
@@ -47,8 +47,8 @@
                 <hr class="sidebar-divider">
                 <div class="sidebar-heading">POS Management</div>
 
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="{{ route('sales.index') }}">
+                <li class="nav-item {{ request()->routeIs('sales.index') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('sales.index') }}">
                         <i class="fas fa-fw fa-cog"></i>
                         <span>POS</span>
                     </a>
@@ -57,17 +57,17 @@
                 <hr class="sidebar-divider">
                 <div class="sidebar-heading">Stock Management</div>
 
-                <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#product" role="button"
-                        aria-expanded="false" aria-controls="collapsePages">
+                <li class="nav-item {{ request()->routeIs('product.*') ? 'active' : '' }}">
+                    <a class="nav-link collapsed" href="#product" data-bs-toggle="collapse"
+                        aria-expanded="{{ request()->routeIs('product.*') ? 'true' : 'false' }}">
                         <i class="fas fa-fw fa-folder"></i>
                         <span>Products</span>
                     </a>
-                    <div id="product" class="collapse">
+                    <div id="product" class="collapse {{ request()->routeIs('product.*') ? 'show' : '' }}">
                         <div class="py-2 collapse-inner rounded">
-                            <a class="collapse-item" href="{{ route('product.index') }}">View Product</a>
-                            <a class="collapse-item" href="{{ route('product.add_product') }}">Add Product</a>
-                            <a class="collapse-item" href="{{ route('product.category') }}">Category</a>
+                            <a class="collapse-item {{ request()->routeIs('product.index') ? 'active' : '' }}" href="{{ route('product.index') }}">View Product</a>
+                            <a class="collapse-item {{ request()->routeIs('product.add_product') ? 'active' : '' }}" href="{{ route('product.add_product') }}">Add Product</a>
+                            <a class="collapse-item {{ request()->routeIs('product.category') ? 'active' : '' }}" href="{{ route('product.category') }}">Category</a>
                         </div>
                     </div>
                 </li>
@@ -75,16 +75,16 @@
                 <hr class="sidebar-divider d-none d-md-block">
                 <div class="sidebar-heading">Profile Management</div>
 
-                <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#profile" role="button"
-                        aria-expanded="false" aria-controls="profile">
+                <li class="nav-item {{ request()->routeIs('profile.*') ? 'active' : '' }}">
+                    <a class="nav-link collapsed" href="#profile" data-bs-toggle="collapse"
+                        aria-expanded="{{ request()->routeIs('profile.*') ? 'true' : 'false' }}">
                         <i class="fas fa-fw fa-folder"></i>
                         <span>Profile</span>
                     </a>
-                    <div id="profile" class="collapse">
-                        <div class=" py-2 collapse-inner rounded">
-                            <a class="collapse-item" href="{{ route('profile.edit') }}">Permission</a>
-                            <a class="collapse-item" href="{{ route('profile.role') }}">Role</a>
+                    <div id="profile" class="collapse {{ request()->routeIs('profile.*') ? 'show' : '' }}">
+                        <div class="py-2 collapse-inner rounded">
+                            <a class="collapse-item {{ request()->routeIs('profile.edit') ? 'active' : '' }}" href="{{ route('profile.edit') }}">Permission</a>
+                            <a class="collapse-item {{ request()->routeIs('profile.role') ? 'active' : '' }}" href="{{ route('profile.role') }}">Role</a>
                         </div>
                     </div>
                 </li>
@@ -155,6 +155,7 @@
                         <div class="topbar-divider d-none d-sm-block"></div>
 
                         <li class="nav-item dropdown no-arrow">
+
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 <span class="me-2 d-none d-lg-inline text-black text-bold m-1">
