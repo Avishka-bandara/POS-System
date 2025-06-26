@@ -43,16 +43,22 @@ class ProductController extends Controller
     public function addCategorySave(Request $request)
     {
 
-       $validator = Validator::make($request->all(), [
-            'categoryName' => 'required|string|max:255',
-        ]);
-        if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()], 422);
+    //    $validator = Validator::make($request->all(), [
+    //         'categoryName' => 'required|string|max:255',
+    //     ]);
+    //     if ($validator->fails()) {
+    //         return response()->json(['error' => $validator->errors()], 422);
+    //     }
+
+        $category = Category::where('name', $request->input('categoryName'))->first();
+        if($category) {
+            return response()->json(['error' => 'Category already exists.'], 422);
         }
+
         Category::create([
             'name' => $request->input('categoryName'),
         ]);
-        return response()->json(['success' => 'Category added successfully.']);
+        return response()->json(['success' => 'Category added successfully.'],200);
     }
 
     public function fetchCategories(){
@@ -60,15 +66,22 @@ class ProductController extends Controller
         return response()->json(['data' => $categories]);
     }
 
+    
     public function updateCategory(Request $request)
     {
         $category = Category::find($request->input('id'));
         if (!$category) {
             return response()->json(['error' => 'Category not found.'], 404);
         }
+
+        $category = Category::where('name', $request->input('CategoryName'))->first();
+        if ($category) {
+            return response()->json(['error' => 'Category already exists.'], 422);
+        }
+
         $category->name = $request->input('CategoryName');
         $category->save();
-        return response()->json(['success' => 'Category updated successfully.']);
+        return response()->json(['success' => 'Category updated successfully.'], 200);
     }
 
     public function deleteCategory($id)
