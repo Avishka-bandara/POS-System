@@ -46,6 +46,12 @@ class SalesController extends Controller
             $product->save();
         }
 
-        return response()->json(['success' => true, 'sale_id' => $sale->id]);
+        return response()->json(['success' => true, 'sale_id' => $sale->id, 'redirect' => route('sales.invoice', $sale->id)]);
+    }
+
+    public function invoice($id)
+    {
+        $sale = Sales::with(['items.product'])->findOrFail($id);
+        return view('sales.invoice', compact('sale'));
     }
 }

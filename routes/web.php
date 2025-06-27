@@ -31,6 +31,7 @@ Route::get('/product/add-catergory',[ProductController::class, 'addCategory'])->
 Route::post('/product/add-product-save',[ProductController::class, 'addNewProductSave'])->name('product.add_new_product_save');
 
 Route::post('/sales/submit', [App\Http\Controllers\SalesController::class, 'store'])->name('sales.store');
+Route::get('/invoice/{id}', [App\Http\Controllers\SalesController::class, 'invoice'])->name('sales.invoice');
 
 
 

@@ -14,6 +14,10 @@ class Sales extends Model
         'grand_total',
     ];
 
+    public function items()
+    {
+        return $this->hasMany(ProductSales::class, 'sale_id');
+    }
     public function scopeFiltered(Builder $query, $filters)
     {
         if (!empty($filters['date_range'])) {

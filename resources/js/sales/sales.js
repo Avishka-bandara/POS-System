@@ -111,13 +111,12 @@ document.getElementById('finalizeSale').addEventListener('click', function () {
         .then(data => {
             if (data.success) {
                 toastr.success('Sale saved successfully!');
-                printBill(); // Optionally wait for user confirmation before printing
-                billItems = [];
-                renderBill();
+                window.location.href = data.redirect; // Redirect to invoice page
             } else {
                 toastr.error('Failed to save sale.');
             }
         })
+
         .catch(error => {
             console.error(error);
             toastr.error('Something went wrong.');
