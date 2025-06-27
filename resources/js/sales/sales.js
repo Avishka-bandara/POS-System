@@ -181,13 +181,13 @@ productSelect.addEventListener('change', function () {
     }
 });
 
-quantityInput.addEventListener('keyup', function () {
+quantityInput.addEventListener('input', function () {
     const max = parseInt(this.getAttribute('max'));
     const val = parseInt(this.value);
 
-    if (!isNaN(val) && val > max) {
+    if (!isNaN(max) && !isNaN(val) && val > max || val==max) {
         console.log(`Quantity exceeds max stock: ${max}`);
         this.value = max;
-        toastr.info(`Maximum allowed quantity is ${max}.`);
+        toastr.info(`You have reached the maximum quantity of ${max}.`);
     }
 });
