@@ -88,13 +88,42 @@ function renderBill() {
 
     grandTotalField.textContent = 'LKR ' + grandTotal.toFixed(2);
 }
-document.getElementById('printBill').addEventListener('click', function () {
+document.getElementById('finalizeSale').addEventListener('click', function () {
     if (billItems.length === 0) {
-        toastr.warning('No items in the bill to print.');
+        toastr.error('No items in the bill.');
         return;
     }
-    printBill();
+
+    // Optional confirmation
+    if (!confirm("Do you want to finalize this sale and print the bill?")) return;
+
+    fetch('/sales/submit', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+        },
+        body: JSON.stringify({
+            items: billItems
+        })
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                toastr.success('Sale saved successfully!');
+                printBill(); // Optionally wait for user confirmation before printing
+                billItems = [];
+                renderBill();
+            } else {
+                toastr.error('Failed to save sale.');
+            }
+        })
+        .catch(error => {
+            console.error(error);
+            toastr.error('Something went wrong.');
+        });
 });
+
 // document.getElementById('removeItem').addEventListener('click', function () {
 //     if (billItems.length === 0) {
 //         toastr.warning('No items in the bill to remove.');
@@ -185,7 +214,7 @@ quantityInput.addEventListener('input', function () {
     const max = parseInt(this.getAttribute('max'));
     const val = parseInt(this.value);
 
-    if (!isNaN(max) && !isNaN(val) && val > max || val==max) {
+    if (!isNaN(max) && !isNaN(val) && val > max || val == max) {
         console.log(`Quantity exceeds max stock: ${max}`);
         this.value = max;
         toastr.info(`You have reached the maximum quantity of ${max}.`);

@@ -12,7 +12,6 @@ class Sales extends Model
     protected $table = 'sales';
     protected $fillable = [
         'grand_total',
-        'product_id'
     ];
 
     public function scopeFiltered(Builder $query, $filters)

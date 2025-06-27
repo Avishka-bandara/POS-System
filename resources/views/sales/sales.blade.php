@@ -69,13 +69,12 @@
         </div>
     </div>
 
-    <!-- Print Button -->
     <div class="text-end mt-3">
-        <button class="btn btn-primary" id="printBill">
-            <i class="fas fa-print me-1"></i> Print Bill
+        <button type="button" class="btn btn-primary" id="finalizeSale">
+            <i class="fas fa-check-circle me-1"></i> Process Sale
         </button>
     </div>
-    
+
 </div>
 
 
