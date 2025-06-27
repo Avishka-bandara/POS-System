@@ -1,6 +1,6 @@
 @extends('layouts.layouts')
 
-@section('title', 'Sales')
+@section('title', 'POS')
 
 
 @section('content')
@@ -31,7 +31,7 @@
 
             <div class="col-md-3">
                 <label for="quantity" class="form-label">Qty</label>
-                <input type="number" class="form-control" id="quantity" name="quantity" min="1" required>
+                <input type="number" class="form-control" id="quantity" name="quantity" max="{{ $product->quantity }}" min="1" required>
             </div>
 
             <div class="col-md-2">
