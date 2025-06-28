@@ -11,6 +11,8 @@ class Sales extends Model
 {
     protected $table = 'sales';
     protected $fillable = [
+        'invoice_number',
+        'customer_id',
         'grand_total',
     ];
 

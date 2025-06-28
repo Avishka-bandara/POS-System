@@ -109,6 +109,7 @@
             <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
+                        <th scope="col">#</th>
                         <th>Invoice</th>
                         <th>Customer</th>
                         <th>Total</th>
@@ -118,9 +119,10 @@
                 <tbody>
                     @foreach ($recentSales as $sale)
                         <tr>
-                            <td>{{ $sale->invoice_no }}</td>
+                            <th scope="row">{{ $sale->id }}</th>
+                            <td>{{ $sale->invoice_number }}</td>
                             <td>{{ $sale->customer_name }}</td>
-                            <td>Rs {{ number_format($sale->total, 2) }}</td>
+                            <td>Rs {{ number_format($sale->grand_total, 2) }}</td>
                             <td>{{ $sale->created_at->format('Y-m-d') }}</td>
                         </tr>
                     @endforeach

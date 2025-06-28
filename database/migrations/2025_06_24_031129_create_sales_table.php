@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
             $table->String('grand_total');
+            $table->String('invoice_number')->unique();
+            $table->foreignId('customer_id')->nullable()->constrained('customers')->onDelete('set null');        
             $table->timestamps();
         });
     }
