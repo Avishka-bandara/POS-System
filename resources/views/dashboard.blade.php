@@ -106,7 +106,7 @@
             <h5>Recent Sales</h5>
         </div>
         <div class="card-body">
-            <table class="table table-bordered table-hover">
+            <table class="table table-bordered text-center">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -114,6 +114,7 @@
                         <th>Customer</th>
                         <th>Total</th>
                         <th>Date</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -124,6 +125,9 @@
                             <td>{{ $sale->customer_name }}</td>
                             <td>Rs {{ number_format($sale->grand_total, 2) }}</td>
                             <td>{{ $sale->created_at->format('Y-m-d') }}</td>
+                            <td>
+                                <a href="{{ route('sales.invoice', $sale->id) }}" class="btn btn-sm btn-primary "><i class="fas fa-eye"></i></a>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
