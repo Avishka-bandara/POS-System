@@ -2,6 +2,12 @@
 
 @section('title', 'Dashboard')
 
+
+@vite([
+    'resources/css/custom.scss',
+    'resources/js/app.js',
+])
+
 @section('content')
 <div class="container-fluid py-4">
     <!-- Filter Panel -->
@@ -46,31 +52,66 @@
 
     <!-- Quick Stats -->
     <div class="row">
-        <div class="col-lg-3 col-sm-6 mb-3">
-            <div class="card text-white bg-success">
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
                 <div class="card-body">
-                    <h6>Total Sales</h6>
-                    <h4>Rs {{ number_format($totalSales, 2) }}</h4>
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-s font-weight-bold text-primary text-uppercase mb-1"> Sales </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ number_format($totalSales, 2) }}</div>
+                            </div>
+                        <div class="col-auto">
+                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                     </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-lg-3 col-sm-6 mb-3">
-            <div class="card text-white bg-info">
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
                 <div class="card-body">
-                    <h6>Total Orders</h6>
-                    <h4>{{ $totalOrders }}</h4>
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-s font-weight-bold text-success text-uppercase mb-1"> Total Orders</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $totalOrders }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-lg-3 col-sm-6 mb-3">
-            <div class="card text-white bg-warning">
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
                 <div class="card-body">
-                    <h6>Products</h6>
-                    <h4>{{ $totalProducts }}</h4>
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-s font-weight-bold text-success text-uppercase mb-1"> Products</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $totalOrders }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-       
+        </div>       
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-s font-weight-bold text-success text-uppercase mb-1"> Products</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $totalOrders }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>       
     </div>
 
     <!-- Sales Charts -->
