@@ -23,7 +23,7 @@ body {
                 background-color: rgba(255, 255, 255, 0.2);
             }
         }
-    }
+    }          
 }
 
 .card {
@@ -96,7 +96,7 @@ body {
 .table-hover tbody tr:hover {
     td{
         color: white !important;
-        background-color: rgba(13, 110, 253, 0.9);;
+        background-color: $primary;
     }
    
 }
@@ -116,6 +116,31 @@ body {
     
   
 }
+
+
+.alert-success {
+        background-color: $success;
+        color: white;
+        border-color: $success;
+        position: relative;
+
+        
+
+}
+
+.alert-danger {
+        background-color: $danger;
+        color: white;
+        border-color: $danger;
+
+}
+.alert-info {
+        background-color: $info;
+        color: white;
+        border-color: $info;
+
+}
+
 
 
 
