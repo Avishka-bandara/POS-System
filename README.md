@@ -21,41 +21,48 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+# 💼 POS System (Point of Sale) – Laravel Based
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+A powerful, user-friendly Point of Sale (POS) system built with **Laravel** that simplifies inventory, billing, and sales reporting for small to medium-scale businesses. This system is designed with a focus on **usability**, **speed**, and **role-based access control**.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 🚀 Features
 
-## Laravel Sponsors
+- 📦 **Product Management** – Add, update, and delete products.
+- 🧾 **Billing System** – Streamlined sales interface with invoice generation.
+- 📊 **Sales & Profit Reports** – View daily/monthly sales, profit/loss summaries.
+- 👥 **Multi-role User Access** – Admin, Cashier, Manager, etc.
+- 📚 **Modular System** – Reusable components and clean MVC structure.
+- 🔒 **Secure Authentication** – Laravel Breeze or Sanctum-based auth (optional).
+- 🖥️ **Responsive UI** – Clean and simple user interface using Bootstrap.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+---
 
-### Premium Partners
+## 🛠️ Tech Stack & Tools Used
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+| Tool            | Purpose                          |
+|----------------|----------------------------------|
+| 🧠 Laravel      | Backend framework (v9 or v10)     |
+| 🌐 MySQL        | Database                          |
+| 🎨 Bootstrap    | Frontend styling                  |
+| 📊 Chart.js     | Graphs for reports                |
+| 🔐 Spatie Roles | Role and permission management    |
+| 🧪 PHPUnit      | Testing framework (optional)      |
+| 📝 DomPDF       | Generate invoices / reports as PDF|
 
-## Contributing
+---
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## 📂 Project Structure
 
-## Code of Conduct
+├── app/
+├── database/
+├── public/
+├── resources/
+│ ├── views/
+│ └── js/
+├── routes/
+│ └── web.php
+├── .env
+└── README.md
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
