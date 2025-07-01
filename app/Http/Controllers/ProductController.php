@@ -12,8 +12,21 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::all();
-        return view('products.view_product',['products' => $products]);
+        $products = Product::with('category')->get();
+
+        // Get only distinct product names
+        $uniqueProductNames = Product::select('name', 'category_id')
+            ->groupBy('name', 'category_id')
+            ->get();
+
+        // Get only distinct brand names
+        $uniqueBrandNames = Product::select('brand')->distinct()->get();
+
+        return view('products.view_product', [
+            'products' => $products,
+            'uniqueProductNames' => $uniqueProductNames,
+            'uniqueBrandNames' => $uniqueBrandNames,
+        ]);
     }
 
     public function addProduct()
@@ -30,16 +43,22 @@ class ProductController extends Controller
     public function addCategorySave(Request $request)
     {
 
-       $validator = Validator::make($request->all(), [
-            'categoryName' => 'required|string|max:255',
-        ]);
-        if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()], 422);
+    //    $validator = Validator::make($request->all(), [
+    //         'categoryName' => 'required|string|max:255',
+    //     ]);
+    //     if ($validator->fails()) {
+    //         return response()->json(['error' => $validator->errors()], 422);
+    //     }
+
+        $category = Category::where('name', $request->input('categoryName'))->first();
+        if($category) {
+            return response()->json(['error' => 'Category already exists.'], 422);
         }
+
         Category::create([
             'name' => $request->input('categoryName'),
         ]);
-        return response()->json(['success' => 'Category added successfully.']);
+        return response()->json(['success' => 'Category added successfully.'],200);
     }
 
     public function fetchCategories(){
@@ -47,15 +66,22 @@ class ProductController extends Controller
         return response()->json(['data' => $categories]);
     }
 
+    
     public function updateCategory(Request $request)
     {
         $category = Category::find($request->input('id'));
         if (!$category) {
             return response()->json(['error' => 'Category not found.'], 404);
         }
+
+        $category = Category::where('name', $request->input('CategoryName'))->first();
+        if ($category) {
+            return response()->json(['error' => 'Category already exists.'], 422);
+        }
+
         $category->name = $request->input('CategoryName');
         $category->save();
-        return response()->json(['success' => 'Category updated successfully.']);
+        return response()->json(['success' => 'Category updated successfully.'], 200);
     }
 
     public function deleteCategory($id)
@@ -94,13 +120,16 @@ class ProductController extends Controller
     {
         $productName = $request->input('productName');
         $brand = $request->input('brandName');
-        $productDetail = Product::where('name', 'like', '%' . $productName . '%')
+        
+        $productDetail = Product::with('category')
+            ->where('name', 'like', '%' . $productName . '%')
             ->where('brand', 'like', '%' . $brand . '%')
             ->get();
-            
+
+
         return response()->json([
             'message' => 'Search completed successfully.',
-            'data' => $productDetail
+            'data' => $productDetail 
         ]);
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
@@ -7,12 +8,11 @@ use App\Http\Controllers\SalesController;
 use App\Http\Controllers\RoleController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
+    // return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -30,6 +30,8 @@ Route::get('/product/add-product',[ProductController::class, 'addProduct'])->nam
 Route::get('/product/add-catergory',[ProductController::class, 'addCategory'])->name('product.category');
 Route::post('/product/add-product-save',[ProductController::class, 'addNewProductSave'])->name('product.add_new_product_save');
 
+Route::post('/sales/submit', [App\Http\Controllers\SalesController::class, 'store'])->name('sales.store');
+Route::get('/invoice/{id}', [App\Http\Controllers\SalesController::class, 'invoice'])->name('sales.invoice');
 
 
 

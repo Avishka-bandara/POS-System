@@ -3,10 +3,6 @@ import toastr from 'toastr';
 
 
 
-
-
-
-
 $(document).ready(function(){
 
      
@@ -22,19 +18,32 @@ $(document).ready(function(){
             url: url,
             data: formData,
             success: function(response){
-                toastr.success(response.message);
-                $('#addCategoryForm')[0].reset();
-                loadCategories();
+                console.log(response);
+                // toastr.success(response.success);
+                // toastr.error(response.error);
+
+                if(response.success){
+                    toastr.success(response.success);
+                    $('#addCategoryForm')[0].reset();
+                    loadCategories();
+                }
+                else if(response.error){
+                    toastr.error(response.error);
+                }
+    
+
             },
             error: function(xhr){
-                toastr.info(xhr.responseJSON.message);
-                console.log(xhr.responseJSON);
-                
+               if(xhr.status === 422){
+                toastr.error(xhr.responseJSON.error); // "Category already exists."
+                } else {
+                toastr.error('An unexpected error occurred.');
+            }
             },
-            complete: function () {
+                complete: function () {
                 $('#loader').hide();
             }
-        })
+        });
     });
 
 
@@ -100,11 +109,16 @@ $(document).ready(function(){
             url: url,
             data: formData,
             success: function(response){
-                toastr.success(response.message);
-                loadCategories();
+                if(response.success){
+                    toastr.success(response.success);
+                    loadCategories();
+                }
+                if(response.error){
+                    toastr.error(response.error);
+                }
             },
             error: function(xhr){
-                toastr.error(xhr.responseJSON.message || 'An error occurred');
+                toastr.error(xhr.responseJSON.error);
                 console.log(xhr.responseJSON);
             },
         })
@@ -120,7 +134,7 @@ $(document).ready(function(){
             type: 'POST',
             url: url,
             success: function(response){
-                toastr.warning(response.message);
+                toastr.warning(response.success);
                 loadCategories();
             },
             error: function(xhr){
