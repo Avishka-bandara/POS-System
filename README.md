@@ -20,9 +20,9 @@ A powerful, user-friendly Point of Sale (POS) system built with **Laravel** that
 
 ## Before run the project run this seeder
 
-    - **php artisan seed:PermissionSeeder**
-    - **php artisan db:seed RoleSeeder** 
-
+- **php artisan seed:PermissionSeeder**
+- **php artisan seed:RoleSeeder** 
+    
 
 # 💼 POS System (Point of Sale) – Laravel Based
 
