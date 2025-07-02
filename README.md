@@ -11,6 +11,7 @@
 </p>
 
 
+
 # 💼 POS System (Point of Sale) – Laravel Based
 
 A powerful, user-friendly Point of Sale (POS) system built with **Laravel** that simplifies inventory, billing, and sales reporting for small to medium-scale businesses. This system is designed with a focus on **usability**, **speed**, and **role-based access control**.
@@ -21,6 +22,13 @@ A powerful, user-friendly Point of Sale (POS) system built with **Laravel** that
 
     - **php artisan seed:PermissionSeeder
     - **php artisan db:seed RoleSeeder
+
+
+# 💼 POS System (Point of Sale) – Laravel Based
+
+A powerful, user-friendly Point of Sale (POS) system built with **Laravel** that simplifies inventory, billing, and sales reporting for small to medium-scale businesses. This system is designed with a focus on **usability**, **speed**, and **role-based access control**.
+
+
 
 ## 🚀 Features
 
