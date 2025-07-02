@@ -5,12 +5,27 @@
 @section('content')
 
 
-    @vite(['resources/css/custom.scss'])
+    @vite([
+        'resources/css/custom.scss'
+        ])
+    @vite([
+        'resources/js/roles/roles.js',
+        'resources/js/app.js'
+        ])
 
     <div class="container mt-5 col-lg-10 col-md-10 col-sm-6">
         <div class="row mb-4 pt-4">
             <div class="col-lg-12 col-md-10 col-sm-6">
-                <h1 class="h3">Edit Roles</h1>
+                <h1 class="h3">Grant Permissions</h1>    
+                @if (session('success'))
+                    <div class="alert alert-success alert-dismissible" role="alert">                       
+                        {{ session('success') }}                       
+                    </div>
+                @elseif (session('error'))
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                        {{ session('error') }}
+                    </div>
+                @endif
             </div>
         </div>
 
@@ -20,7 +35,7 @@
                 <h5>Create New Role</h5>
             </div>
             <div class="card-body">
-                <form id="createRoleForm">
+                <form id="createRoleForm" action="{{url('api/roles')}}" method="POST">
                     <div class=" row mt-3">
                         <div class="col-5 mb-3">
                             <input type="text" class="form-control" id="roleName" name="roleName"
@@ -40,84 +55,48 @@
                 <h5>Manage Role Permissions</h5>
             </div>
             <div class="card-body">
-                <form id="rolePermissionsForm">
                     <!-- Role Dropdown -->
+                    <form action="{{route('profile.rolesave')}}" method="POST" id="permissionsForm">
+                        @csrf
                     <div class="mb-4">
                         <label for="roleSelect" class="form-label">Select Role</label>
-                        <select class="form-select" id="roleSelect" name="roleSelect" style="box-shadow: none;">
-                            <option value="">-- Choose a role --</option>
-                            <option value="admin">Admin</option>
-                            <option value="cashier">Cashier</option>
-                            <option value="manager">Manager</option>
-                            <!-- More roles will be dynamically loaded here -->
+                        <select class="form-select" id="role_id" name="role_id" style="box-shadow: none;">
+                            
                         </select>
                     </div>
-
                     <!-- Permissions Table -->
                     <div class="table-responsive" id="permissionTable">
                         <table class="table table-hover align-middle" >
                             <thead>
                                 <tr>
                                     <th>Permission Name</th>
-                                    <th class="text-center">Allow</th>
-                                    <th class="text-center">Not Allow</th>
+                                    
                                 </tr>
                             </thead>
                             <tbody id="permissionsTable">
                                 <!-- Permissions will be rendered dynamically -->
-                                <tr>
-                                    <td>Add Product</td>
-                                    <td class="text-center">
-                                        <input type="radio" name="add_product" value="1" class="form-check-input">
-                                    </td>
-                                    <td class="text-center">
-                                        <input type="radio" name="add_product" value="0" class="form-check-input">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>View Product</td>
-                                    <td class="text-center">
-                                        <input type="radio" name="view_product" value="1" class="form-check-input">
-                                    </td>
-                                    <td class="text-center">
-                                        <input type="radio" name="view_product" value="0" class="form-check-input">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Edit Product</td>
-                                    <td class="text-center">
-                                        <input type="radio" name="edit_product" value="1" class="form-check-input">
-                                    </td>
-                                    <td class="text-center">
-                                        <input type="radio" name="edit_product" value="0" class="form-check-input">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Delete Product</td>
-                                    <td class="text-center">
-                                        <input type="radio" name="delete_product" value="1" class="form-check-input">
-                                    </td>
-                                    <td class="text-center">
-                                        <input type="radio" name="delete_product" value="0" class="form-check-input">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>POS Access</td>
-                                    <td class="text-center">
-                                        <input type="radio" name="pos" value="1" class="form-check-input">
-                                    </td>
-                                    <td class="text-center">
-                                        <input type="radio" name="pos" value="0" class="form-check-input">
-                                    </td>
-                                </tr>
+                                
+                                @foreach($permissions as $permission)
+                                    <tr>
+                                        <td width="80%">{{$permission->name}}</td>
+                                        <td>
+                                            <input type="checkbox" class="permission-checkbox" id="permission_{{ $permission->id }}" name="permissions[{{ $permission->name }}]" value="{{$permission->name}}">
+                                        </td>
+                                    </tr>
+                                @endforeach
+
+                                
                             </tbody>
                         </table>
                     </div>
 
                     <div class="text-end">
-                        <button type="submit" class="btn btn-success mt-3">Update Permissions</button>
+                        <button type="button" class="btn btn-danger mt-3" id="deleteRole">Delete Role</button>
+                        <button type="submit" class="btn btn-success mt-3" id="updatePermissions">Update Permissions</button>
                     </div>
+                    
                 </form>
+                
             </div>
         </div>
 

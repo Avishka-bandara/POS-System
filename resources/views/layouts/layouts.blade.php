@@ -68,12 +68,15 @@
                         <div class="py-2 collapse-inner rounded">
                             <a class="collapse-item {{ request()->routeIs('product.index') ? 'active' : '' }}" href="{{ route('product.index') }}">View Product</a>
                             <a class="collapse-item {{ request()->routeIs('product.add_product') ? 'active' : '' }}" href="{{ route('product.add_product') }}">Add Product</a>
+                            @hasrole('admin')
                             <a class="collapse-item {{ request()->routeIs('product.category') ? 'active' : '' }}" href="{{ route('product.category') }}">Category</a>
+                            @endhasrole
                         </div>
                     </div>
                 </li>
 
                 <hr class="sidebar-divider d-none d-md-block">
+                @hasrole('admin')
                 <div class="sidebar-heading">Profile Management</div>
 
                 <li class="nav-item {{ request()->routeIs('profile.*') ? 'active' : '' }}">
@@ -89,6 +92,7 @@
                         </div>
                     </div>
                 </li>
+                @endhasrole
             </div>
         </ul>
         <!-- End of Sidebar -->
