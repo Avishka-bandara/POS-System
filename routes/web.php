@@ -36,15 +36,15 @@ Route::group(['middleware' => ['role:admin']], function () {
 });
 
 // product routes
-Route::group(['middleware' => ['role:role:admin|manager|cashier']], function () {
-Route::get('/product/view-product',[ProductController::class, 'index'])->name('product.index');
-Route::get('/product/add-product',[ProductController::class, 'addProduct'])->name('product.add_product');
-Route::get('/product/add-catergory',[ProductController::class, 'addCategory'])->name('product.category');
-Route::post('/product/add-product-save',[ProductController::class, 'addNewProductSave'])->name('product.add_new_product_save');
+Route::group(['middleware' => ['role:admin|manager|cashier']], function () {
+    Route::get('/product/add-catergory',[ProductController::class, 'addCategory'])->name('product.category');
+    Route::get('/product/view-product',[ProductController::class, 'index'])->name('product.index');
+    Route::get('/product/add-product',[ProductController::class, 'addProduct'])->name('product.add_product');
+    Route::post('/product/add-product-save',[ProductController::class, 'addNewProductSave'])->name('product.add_new_product_save');
 
-// billing routes
-Route::post('/sales/submit', [SalesController::class, 'store'])->name('sales.store');
-Route::get('/invoice/{id}', [SalesController::class, 'invoice'])->name('sales.invoice');
-Route::get('POS/Sales', [SalesController::class, 'index'])->name('sales.index');
+    // billing routes
+    Route::post('/sales/submit', [SalesController::class, 'store'])->name('sales.store');
+    Route::get('/invoice/{id}', [SalesController::class, 'invoice'])->name('sales.invoice');
+    Route::get('POS/Sales', [SalesController::class, 'index'])->name('sales.index');
 
 });
