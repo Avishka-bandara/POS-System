@@ -151,6 +151,21 @@ class ProductController extends Controller
 
 
     public function productSettingindex(){
-        return view('profile.product_setting');
+        $products = Product::with('category')
+        ->where('action', 0)
+        ->get();
+        return view('profile.product_setting', ['products' => $products]);
+        
+    }
+    public function activateProduct($id){
+        $product = Product::find($id);
+        if (!$product) {
+            return response()->json(['error' => 'Product not found.'], 404);
+        }
+
+        $product->action = 1; // Assuming 1 means active
+        $product->save();
+
+        return response()->json(['success' => 'Product activated successfully.']);
     }
 }

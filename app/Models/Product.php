@@ -18,7 +18,8 @@ class Product extends Model
         'category',
         'quantity',
         'exp_date',
-        'category_id' 
+        'category_id',
+        'action',
     ];
 
     public function category()

@@ -4,7 +4,7 @@
 @section('title', 'Product Settings')
 @section('content')
 
-    @vite(['resources/css/custom.scss', 'resources/js/app.js', 'resources/js/product/product-setting.js'])
+    @vite(['resources/css/custom.scss', 'resources/js/app.js', 'resources/js/roles/product-setting.js'])
 
 
 
@@ -27,7 +27,7 @@
                 <div class="col-lg-12 col-md-10 col-sm-6">
                     <div class="card shadow">
                         <div class="card-body">
-                            <form action="{{ url('/api/edit-product') }}" method="POST" id="editProductForm">
+                            <form action="#" method="POST" id="editProductForm">
                                 @csrf
                                 <div class="row mb-3">
                                     <div class="col-auto">
@@ -44,14 +44,11 @@
                                         <input type="text" class="form-control" id="tax" name="tax"
                                             placeholder="tax value">
                                     </div>
-
-
-
-
                                 </div>
-
+                                <div>
+                                    <button type="submit" class="btn btn-primary">Update Settings</button>
+                                </div>
                             </form>
-
                         </div>
                     </div>
 
@@ -76,7 +73,22 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-
+                                        @foreach ($products as $product)
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>{{ $product->name }}</td>
+                                                <td>{{ $product->brand }}</td>
+                                                <td>{{ $product->quantity }}</td>
+                                                <td>{{ $product->size }}</td>
+                                                <td>{{ $product->exp_date }}</td>
+                                                <td>{{ $product->price }}</td>
+                                                <td>{{ $product->category->name }}</td>
+                                                <td>
+                                                    <button class="btn btn-success btn-sm" id="activate"
+                                                        data-id="{{ $product->id }}">Active</button>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -84,6 +96,7 @@
                     </div>
                 </div>
             </div>
-
         </div>
-    @endsection
+    </div>
+
+@endsection
