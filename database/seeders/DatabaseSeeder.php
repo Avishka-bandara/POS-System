@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Database\Seeders\RoleSeeder;
+use Database\Seeders\PermissionSeeder;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -14,14 +17,23 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
-
         $this->call([
-            RoleSeeder::class,
+            PermissionSeeder::class, // create permissions first
+            RoleSeeder::class,       // then assign them to roles
         ]);
+
+
+        $user = User::factory()->create([
+            'first_name' => 'Test',
+            'last_name' => 'User',
+            'phone' => '1234567890',
+            'email' => 'test@example.com',
+            'password' => Hash::make('12345678'), // password
+
+        ]);
+
+         $user->assignRole('admin');
+
+        
     }
 }

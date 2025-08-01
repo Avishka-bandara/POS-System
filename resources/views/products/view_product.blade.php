@@ -4,11 +4,7 @@
 
 @section('content')
 
-@vite([
-    'resources/js/product/edit-product.js',
-    'resources/css/custom.scss',
-    'resources/js/app.js'
-])
+    @vite(['resources/js/product/edit-product.js', 'resources/css/custom.scss', 'resources/js/app.js'])
     <div class="container pt-4 col-lg-10 col-md-10 col-sm-6">
         <div class="row mb-4 pt-4">
             <div class="col-lg-12 col-md-10 col-sm-6">
@@ -25,11 +21,11 @@
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                     <label for="productName" class="form-label">Product Name</label>
-                                    <select type="text" class="form-control" id="productName" placeholder="Type to search..." name="productName">
-                                        <option  disabled selected>Select Product</option>
+                                    <select class="form-control select2" id="productName" name="productName">
+                                        <option disabled selected>Select Product</option>
                                         @foreach ($uniqueProductNames as $product)
                                             <option value="{{ $product->name }}">
-                                                {{ $product->name }} -  {{ $product->category->name}}
+                                                {{ $product->name }} - {{ $product->category->name }}
                                             </option>
                                         @endforeach
                                     </select>
@@ -37,11 +33,12 @@
 
                                 <div class="col-md-6">
                                     <label for="brandName" class="form-label">Brand Name</label>
-                                    <select type="text" class="form-control" id="brandName" placeholder="Type to search..." name="brandName">
-                                        <option  disabled selected>Brand</option>
+                                    <select type="text" class="form-control" id="brandName"
+                                        placeholder="Type to search..." name="brandName">
+                                        <option disabled selected>Brand</option>
                                         @foreach ($uniqueBrandNames as $BrandName)
                                             <option value="{{ $BrandName->brand }}">
-                                                {{ $BrandName->brand }}  
+                                                {{ $BrandName->brand }}
                                             </option>
                                         @endforeach
                                     </select>
@@ -88,14 +85,15 @@
                                 <th>Name</th>
                                 <th>Brand</th>
                                 <th>quantity</th>
+                                <th>Size (g)</th>
                                 <th>Expire Date</th>
-                                <th>Price</th>
+                                <th>Price (LKR)</th>
                                 <th>Catergory</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            
+
                         </tbody>
                     </table>
                 </div>
@@ -110,6 +108,7 @@
 
 
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     @vite(['resources/js/app.js', 'resources/css/custom.scss'])
@@ -118,26 +117,48 @@
 <body>
 
     <!-- Offcanvas Drawer -->
-    <div id="editDrawer" class="offcanvas offcanvas-end"  aria-labelledby="editDrawerLabel">
+    <div id="editDrawer" class="offcanvas offcanvas-end" aria-labelledby="editDrawerLabel">
         <div class="offcanvas-header">
             <h5 id="editDrawerLabel">Edit Category</h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
         </div>
         <div class="offcanvas-body">
-            <form id="editCategoryForm" method="POST" action="#">
+            <form id="editCategoryForm" method="POST" action="{{ url('/api/product/update/') }}">
                 @csrf
-                {{-- <input type="hidden" name="id" id="CategoryId">
+                <input type="hidden" name="id" id="CategoryId">
                 <div class="mb-3">
-                    <label for="CategoryName" class="form-label">Category Name</label>
-                    <input type="text" class="form-control" id="CategoryName" name="CategoryName" required>
+                    <label for="CategoryName" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="CategoryName" name="CategoryName" disabled>
                 </div>
-                <button type="submit" class="btn btn-success" data-bs-dismiss="offcanvas" aria-label="Close">Update</button> --}}
+                <div class="mb-3">
+                    <label for="BrandName" class="form-label">Brand Name</label>
+                    <input type="text" class="form-control" id="BrandName" name="BrandName" disabled>
+                </div>
+                <div class="mb-3">
+                    <label for="quantity" class="form-label">quantity</label>
+                    <input type="text" class="form-control" id="quantity" name="quantity" required>
+                </div>
+                <div class="mb-3">
+                    <label for="expire_date" class="form-label">Expire Date</label>
+                    <input type="date" class="form-control" id="expire_date" name="expire_date" required>
+                </div>
+                <div class="mb-3">
+                    <label for="price" class="form-label">Price</label>
+                    <input type="text" class="form-control" id="price" name="price" required>
+                </div>
+                <div class="mb-3">
+                    <label for="Category" class="form-label">Category</label>
+                    <input type="text" class="form-control" id="Category" name="Category" disabled>
+                </div>
+                <button type="submit" class="btn btn-success" data-bs-dismiss="offcanvas"
+                    aria-label="Close">Update</button>
+                <button type="reset" class="btn btn-danger" data-bs-dismiss="offcanvas"
+                    aria-label="Close">Disable</button>
             </form>
         </div>
     </div>
 
-    
+
 </body>
 
 </html>
-

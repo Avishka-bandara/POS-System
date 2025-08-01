@@ -132,4 +132,25 @@ class ProductController extends Controller
             'data' => $productDetail 
         ]);
     }
+
+
+    public function updateProduct(Request $request) {
+        // dd($id);
+        $productId = $request->input('id');
+        $product = Product::find($productId);
+        if(!$product) {
+            return response()->json(['error' => 'Product not found.'], 404);
+        }
+        $product->quantity = $request->input('quantity');
+        $product->exp_date = $request->input('expire_date');
+        $product->price = $request->input('price');
+        $product->save();
+
+        return redirect()->back()->with('success', 'Product updated successfully.');
+    }
+
+
+    public function productSettingindex(){
+        return view('profile.product_setting');
+    }
 }
