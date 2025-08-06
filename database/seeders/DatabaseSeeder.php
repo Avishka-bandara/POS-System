@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Database\Seeders\RoleSeeder;
 use Database\Seeders\PermissionSeeder;
+use Database\Seeders\MeasurementUnitSeeder;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -19,7 +20,8 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
         $this->call([
             PermissionSeeder::class, // create permissions first
-            RoleSeeder::class,       // then assign them to roles
+            RoleSeeder::class,
+            MeasurementUnitSeeder::class, // then assign them to roles
         ]);
 
 

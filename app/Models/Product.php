@@ -20,6 +20,7 @@ class Product extends Model
         'exp_date',
         'category_id',
         'action',
+        'measurement_unit_id',
     ];
 
     public function category()
@@ -34,5 +35,9 @@ class Product extends Model
     public function sales()
     {
         return $this->hasMany(ProductSales::class, 'product_id');
+    }
+    public function measurementUnit()
+    {
+        return $this->belongsTo(MeasurementUnit::class, 'measurement_unit_id');
     }
 }
