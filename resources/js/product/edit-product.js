@@ -47,7 +47,7 @@ function fetchDetails(products) {
 
     products.forEach((product, index) => {
         const row = `
-            <tr>
+            <tr">
                 <td>${index + 1}</td>
                 <td>${product.name}</td>
                 <td>${product.brand}</td>

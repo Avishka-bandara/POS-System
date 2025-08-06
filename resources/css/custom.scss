@@ -103,8 +103,21 @@ body {
     td {
         color: white !important;
         background-color: $primary;
+
     }
 
+}
+
+.table {
+    tr {
+
+
+        td,
+        th {
+            color: $secondary;
+            text-align: left;
+        }
+    }
 }
 
 #accordionSidebar {

@@ -15,6 +15,8 @@ class ProductSales extends Model
         'sale_id',
         'sale_quantity', 
         'sale_price',
+        'created_at',
+        'updated_at',
     ];
 
     public function product()

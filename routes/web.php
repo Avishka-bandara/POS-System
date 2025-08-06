@@ -49,7 +49,6 @@ Route::group(['middleware' => ['role:admin|manager|cashier']], function () {
     // billing routes
     Route::post('/sales/submit', [SalesController::class, 'store'])->name('sales.store');
     Route::get('POS/Sales', [SalesController::class, 'index'])->name('sales.index');
-    Route::get('/invoice/{id}', [SalesController::class, 'invoice'])->name('sales.invoice');
-
+   
 
 });

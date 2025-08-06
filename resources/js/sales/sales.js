@@ -2,6 +2,7 @@ import $ from 'jquery';
 import toastr from 'toastr';
 
 let total = 0;
+let Balance = 0;
 
 // $(document).ready(function () {
 //     $('#productForm').on('submit', function (e) {
@@ -97,6 +98,13 @@ function renderBill() {
 
 $(document).ready(function(){
     $('#finalizeSale').on('click', function(){
+
+        const payment = parseFloat($('#payment').val());
+
+
+        console.log('Payment amount:', payment);
+        console.log('Balance amount:', Balance);
+
         if (billItems.length === 0) {
             toastr.error('No items in the bill.');
             return;
@@ -111,14 +119,18 @@ $(document).ready(function(){
             method: 'POST',
             data: {
                 items: billItems,
+                payment: payment,
+                balance: Balance,
                 _token: $('meta[name="csrf-token"]').attr('content')
             },
             success: function(response) {
                 if (response.success) {
-                    toastr.success('Sale saved successfully!');
-                    window.location.href = response.redirect; // Redirect to invoice page
+                    // toastr.success('Purchase successful!');
+                    console.log(response.sale_id);
+                    printInvoice(response.sale_id, response.payment, response.balance);
+
                 } else {
-                    toastr.error('Failed to save sale.');
+                    toastr.error('Failed to save purchase.');
                 }
             },
             error: function(xhr) {
@@ -126,10 +138,41 @@ $(document).ready(function(){
                 toastr.error('Something went wrong.');
             }
         })
-        
-                  
+                        
+
     });
+
+
+
+    function printInvoice(saleID, payment, balance) {
+
+        
+
+        const url = `/api/invoice/${saleID}`;
+
+        const popupWidth = 700;
+        const popupHeight = 600;
+        const left = (screen.width - popupWidth) / 2;
+        const top = (screen.height - popupHeight) / 2;
+
+        // window.open(
+        //     url,
+        //     '_blank',
+        //     `width=${popupWidth},height=${popupHeight},left=${left},top=${top}`
+        // );
+
+        // Optional: refresh or reset after short delay
+        // setTimeout(() => {
+        //     location.reload(); // or resetCart(); your logic
+        // }, 1000);
+    }
+    
+    
+
 })
+
+
+
 // document.getElementById('finalizeSale').addEventListener('click', function () {
 //     if (billItems.length === 0) {
 //         toastr.error('No items in the bill.');
@@ -183,59 +226,62 @@ document.addEventListener('click', function (e) {
 });
 
 
-function printBill() {
-    let printWindow = window.open('', '', 'width=800,height=600');
-    let style = `
-            <style>
-                body { font-family: Arial, sans-serif; padding: 20px; }
-                table { width: 100%; border-collapse: collapse; }
-                th, td { border: 1px solid #000; padding: 8px; text-align: center; }
-                h2 { text-align: center; }
-            </style>
-        `;
 
-    let content = `
-            <html>
-                <head><title>Print Bill</title>${style}</head>
-                <body>
-                    <h2>Customer Bill</h2>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Product</th>
-                                <th>Qty</th>
-                                <th>Price</th>
-                                <th>Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            ${billItems.map((item, i) => `
-                                <tr>
-                                    <td>${i + 1}</td>
-                                    <td>${item.name}</td>
-                                    <td>${item.quantity}</td>
-                                    <td>LKR ${item.price.toFixed(2)}</td>
-                                    <td>LKR ${item.total}</td>
-                                </tr>
-                            `).join('')}
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <td colspan="4"><strong>Grand Total</strong></td>
-                                <td><strong>LKR ${billItems.reduce((sum, item) => sum + parseFloat(item.total), 0).toFixed(2)}</strong></td>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </body>
-            </html>
-        `;
 
-    printWindow.document.write(content);
-    printWindow.document.close();
-    printWindow.focus();
-    printWindow.print();
-}
+
+// function printBill() {
+//     let printWindow = window.open('', '', 'width=800,height=600');
+//     let style = `
+//             <style>
+//                 body { font-family: Arial, sans-serif; padding: 20px; }
+//                 table { width: 100%; border-collapse: collapse; }
+//                 th, td { border: 1px solid #000; padding: 8px; text-align: center; }
+//                 h2 { text-align: center; }
+//             </style>
+//         `;
+
+//     let content = `
+//             <html>
+//                 <head><title>Print Bill</title>${style}</head>
+//                 <body>
+//                     <h2>Customer Bill</h2>
+//                     <table>
+//                         <thead>
+//                             <tr>
+//                                 <th>#</th>
+//                                 <th>Product</th>
+//                                 <th>Qty</th>
+//                                 <th>Price</th>
+//                                 <th>Total</th>
+//                             </tr>
+//                         </thead>
+//                         <tbody>
+//                             ${billItems.map((item, i) => `
+//                                 <tr>
+//                                     <td>${i + 1}</td>
+//                                     <td>${item.name}</td>
+//                                     <td>${item.quantity}</td>
+//                                     <td>LKR ${item.price.toFixed(2)}</td>
+//                                     <td>LKR ${item.total}</td>
+//                                 </tr>
+//                             `).join('')}
+//                         </tbody>
+//                         <tfoot>
+//                             <tr>
+//                                 <td colspan="4"><strong>Grand Total</strong></td>
+//                                 <td><strong>LKR ${billItems.reduce((sum, item) => sum + parseFloat(item.total), 0).toFixed(2)}</strong></td>
+//                             </tr>
+//                         </tfoot>
+//                     </table>
+//                 </body>
+//             </html>
+//         `;
+
+//     printWindow.document.write(content);
+//     printWindow.document.close();
+//     printWindow.focus();
+//     printWindow.print();
+// }
 
 const productSelect = document.getElementById('productItem');
 const quantityInput = document.getElementById('quantity');
@@ -268,15 +314,15 @@ document.getElementById('payment').addEventListener('change', function(){
     const payment = parseInt(this.value);
     const balance = document.getElementById('balance');
 
-    console.log('Payment amount:', payment);
-    console.log('Grand Total:', total);
+    // console.log('Payment amount:', payment);
+    // console.log('Grand Total:', total);
 
     if (isNaN(payment) || payment < 0 || payment < total) {
         toastr.error('Invalid payment amount.');
         return;
     }
     else{
-
+        Balance = payment - total;
         balance.textContent = 'LKR ' + (payment - total);
         // location.reload();
     }
