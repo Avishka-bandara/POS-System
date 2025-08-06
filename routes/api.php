@@ -18,6 +18,8 @@ Route::post('/add-category-save', [ProductController::class, 'addCategorySave'])
 Route::get('/fetch-categories', [ProductController::class, 'fetchCategories'])->name('fetch.categories');
 Route::post('/update-category', [ProductController::class, 'updateCategory'])->name('update.category');
 Route::post('/delete-category/{id}', [ProductController::class, 'deleteCategory'])->name('delete.category');
+Route::post('/product/update', [ProductController::class, 'updateProduct'])->name('product.update');
+Route::post('product/activate/{id}', [ProductController::class, 'activateProduct'])->name('product.activate');
 
 
 

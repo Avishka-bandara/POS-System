@@ -1,6 +1,6 @@
-@import '@fortawesome/fontawesome-free/css/all.min.css';
-@import 'bootstrap/scss/bootstrap';
-@import 'flatpickr/dist/flatpickr.min.css';
+@use '@fortawesome/fontawesome-free/css/all.min.css';
+@use 'bootstrap/scss/bootstrap';
+@use 'flatpickr/dist/flatpickr.min.css';
 
 
 
@@ -23,7 +23,7 @@ body {
                 background-color: rgba(255, 255, 255, 0.2);
             }
         }
-    }          
+    }
 }
 
 .card {
@@ -34,6 +34,7 @@ body {
 .btn-primary {
     background-color: $primary;
     border-color: $primary;
+
     &:hover {
         background-color: darken($primary, 10%);
         border-color: darken($primary, 10%);
@@ -47,12 +48,13 @@ body {
 }
 
 
-.btn-group{
-    .btn {      
-            background-color: $primary;
-            border-color: $primary;
-        
+.btn-group {
+    .btn {
+        background-color: $primary;
+        border-color: $primary;
+
     }
+
     .btn:hover {
         background-color: darken($primary, 10%);
         border-color: darken($primary, 20%);
@@ -60,9 +62,10 @@ body {
     }
 }
 
-.nav-item{
-    &:hover{
+.nav-item {
+    &:hover {
         cursor: pointer;
+
         // background-color: rgba(189, 21, 21, 0.9);
         .nav-link {
             color: $primary;
@@ -71,76 +74,114 @@ body {
 }
 
 
-.offcanvas-header{
-    h5{
+.offcanvas-header {
+    h5 {
         color: white;
     }
-    
+
     background-color:$primary;
 }
 
-#profile,#product{
-    &:hover{
+#profile,
+#product {
+    &:hover {
         color: white;
     }
-    .collapse-item{
+
+    .collapse-item {
         color: white;
-        &:hover{
+
+        &:hover {
             color: $primary;
-            
+
         }
-        
+
     }
 }
 
 .table-hover tbody tr:hover {
-    td{
+    td {
         color: white !important;
         background-color: $primary;
     }
-   
+
 }
 
-#accordionSidebar{
+#accordionSidebar {
 
     #shopName {
         justify-content: start;
         position: fixed;
-       
+
     }
-    #componentName{
+
+    #componentName {
         justify-content: center;
         position: fixed;
         margin-top: 8rem;
     }
-    
-  
+
+
 }
 
 
 .alert-success {
-        background-color: $success;
-        color: white;
-        border-color: $success;
-        position: relative;
+    background-color: $success;
+    color: white;
+    border-color: $success;
+    position: relative;
 
-        
+
 
 }
 
 .alert-danger {
-        background-color: $danger;
-        color: white;
-        border-color: $danger;
+    background-color: $danger;
+    color: white;
+    border-color: $danger;
 
 }
+
 .alert-info {
-        background-color: $info;
-        color: white;
-        border-color: $info;
+    background-color: $info;
+    color: white;
+    border-color: $info;
 
 }
 
 
+.bill-heading {
+    font-weight: bold;
+    color: $danger !important;
+    font-size: 1.2rem;
+}
 
+#payment {
+    input {
+        border: none;
+        background-color: transparent;
+        color: $info;
 
+        &::placeholder {
+            color: $info;
+        }
+
+        &:focus {
+            border: 1px solid red;
+        }
+    }
+}
+
+tfoot {
+    .balance {
+        color: $success !important;
+    }
+
+    .payment {
+        color: $info !important;
+    }
+}
+
+input {
+    border: none;
+}

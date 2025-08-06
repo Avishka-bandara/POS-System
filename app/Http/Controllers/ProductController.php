@@ -132,4 +132,40 @@ class ProductController extends Controller
             'data' => $productDetail 
         ]);
     }
+
+
+    public function updateProduct(Request $request) {
+        // dd($id);
+        $productId = $request->input('id');
+        $product = Product::find($productId);
+        if(!$product) {
+            return response()->json(['error' => 'Product not found.'], 404);
+        }
+        $product->quantity = $request->input('quantity');
+        $product->exp_date = $request->input('expire_date');
+        $product->price = $request->input('price');
+        $product->save();
+
+        return redirect()->back()->with('success', 'Product updated successfully.');
+    }
+
+
+    public function productSettingindex(){
+        $products = Product::with('category')
+        ->where('action', 0)
+        ->get();
+        return view('profile.product_setting', ['products' => $products]);
+        
+    }
+    public function activateProduct($id){
+        $product = Product::find($id);
+        if (!$product) {
+            return response()->json(['error' => 'Product not found.'], 404);
+        }
+
+        $product->action = 1; // Assuming 1 means active
+        $product->save();
+
+        return response()->json(['success' => 'Product activated successfully.']);
+    }
 }

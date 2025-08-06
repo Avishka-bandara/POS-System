@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import toastr from 'toastr';
 
-
+let total = 0;
 
 // $(document).ready(function () {
 //     $('#productForm').on('submit', function (e) {
@@ -61,6 +61,9 @@ document.getElementById('productForm').addEventListener('submit', function (e) {
     billItems.push({ id: productId, name: productText, quantity, price, total });
     renderBill();
 
+    // console.log('billItems:', billItems);
+    
+
     // Reset inputs
     quantityInput.value = '';
     productSelect.selectedIndex = 0;
@@ -87,41 +90,80 @@ function renderBill() {
     });
 
     grandTotalField.textContent = 'LKR ' + grandTotal.toFixed(2);
+
+    total = grandTotal; 
+
 }
-document.getElementById('finalizeSale').addEventListener('click', function () {
-    if (billItems.length === 0) {
-        toastr.error('No items in the bill.');
-        return;
-    }
 
-    // Optional confirmation
-    if (!confirm("Do you want to finalize this sale and print the bill?")) return;
+$(document).ready(function(){
+    $('#finalizeSale').on('click', function(){
+        if (billItems.length === 0) {
+            toastr.error('No items in the bill.');
+            return;
+        }
 
-    fetch('/sales/submit', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-        },
-        body: JSON.stringify({
-            items: billItems
-        })
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                toastr.success('Sale saved successfully!');
-                window.location.href = data.redirect; // Redirect to invoice page
-            } else {
-                toastr.error('Failed to save sale.');
+        // Optional confirmation
+        if (!confirm("Do you want to finalize this sale and print the bill?")) return;
+
+        
+        $.ajax({
+            url: '/sales/submit',
+            method: 'POST',
+            data: {
+                items: billItems,
+                _token: $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(response) {
+                if (response.success) {
+                    toastr.success('Sale saved successfully!');
+                    window.location.href = response.redirect; // Redirect to invoice page
+                } else {
+                    toastr.error('Failed to save sale.');
+                }
+            },
+            error: function(xhr) {
+                console.error(xhr.responseText);
+                toastr.error('Something went wrong.');
             }
         })
+        
+                  
+    });
+})
+// document.getElementById('finalizeSale').addEventListener('click', function () {
+//     if (billItems.length === 0) {
+//         toastr.error('No items in the bill.');
+//         return;
+//     }
+    
+//     // Optional confirmation
+//     if (!confirm("Do you want to finalize this sale and print the bill?")) return;
 
-        .catch(error => {
-            console.error(error);
-            toastr.error('Something went wrong.');
-        });
-});
+//     fetch('/sales/submit', {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json',
+//             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+//         },
+//         body: JSON.stringify({
+//             items: billItems
+//         })
+//     })
+//         .then(response => response.json())
+//         .then(data => {
+//             if (data.success) {
+//                 toastr.success('Sale saved successfully!');
+//                 window.location.href = data.redirect; // Redirect to invoice page
+//             } else {
+//                 toastr.error('Failed to save sale.');
+//             }
+//         })
+
+//         .catch(error => {
+//             console.error(error);
+//             toastr.error('Something went wrong.');
+//         });
+// });
 
 // document.getElementById('removeItem').addEventListener('click', function () {
 //     if (billItems.length === 0) {
@@ -219,3 +261,26 @@ quantityInput.addEventListener('input', function () {
         toastr.info(`You have reached the maximum quantity of ${max}.`);
     }
 });
+
+
+
+document.getElementById('payment').addEventListener('change', function(){
+    const payment = parseInt(this.value);
+    const balance = document.getElementById('balance');
+
+    console.log('Payment amount:', payment);
+    console.log('Grand Total:', total);
+
+    if (isNaN(payment) || payment < 0 || payment < total) {
+        toastr.error('Invalid payment amount.');
+        return;
+    }
+    else{
+
+        balance.textContent = 'LKR ' + (payment - total);
+        // location.reload();
+    }
+        
+    
+    
+})

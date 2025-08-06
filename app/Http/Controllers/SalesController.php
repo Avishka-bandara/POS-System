@@ -18,6 +18,7 @@ class SalesController extends Controller
 
     public function store(Request $request)
     {   
+        // dd($request->all());
         $invoiceNumber = $this->generateInvoiceNumber();
         $items = $request->input('items');
 
@@ -28,7 +29,7 @@ class SalesController extends Controller
         $sale = Sales::create([
             'grand_total' => array_sum(array_column($items, 'total')),
             'invoice_number' => $invoiceNumber,
-            'customer_id' => $request->input('customer_id', null),
+            // 'customer_id' => $request->input('customer_id', null),
         ]);
 
         foreach ($items as $item) {
@@ -60,8 +61,16 @@ class SalesController extends Controller
 
     public function generateInvoiceNumber()
     {
-        $latestSale = Sales::latest()->first();
-        $lastInvoiceNumber = $latestSale ? $latestSale->invoice_number : 0;
-        return 'INV-' . str_pad($lastInvoiceNumber + 1, 6, '0', STR_PAD_LEFT);
+            $latestSale = Sales::latest()->first();
+
+    if ($latestSale && $latestSale->invoice_number) {
+        // Remove the prefix and convert to integer
+        $lastNumber = (int) str_replace('INV-', '', $latestSale->invoice_number);
+    } else {
+        $lastNumber = 0;
+    }
+
+    // Increment and return formatted number
+    return 'INV-' . str_pad($lastNumber + 1, 6, '0', STR_PAD_LEFT);
     }
 }

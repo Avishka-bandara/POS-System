@@ -9,16 +9,8 @@
 
     <title> @yield('title')</title>
 
-    @vite([
-    'resources/css/sb-admin-2.css',
-    'resources/css/custom.scss',
-    'resources/css/toast.scss',
-
-    ])
-    @vite([
-    'resources/js/sb-admin-2.js',
-    'resources/js/app.js'
-    ])
+    @vite(['resources/css/sb-admin-2.css', 'resources/css/custom.scss', 'resources/css/toast.scss'])
+    @vite(['resources/js/sb-admin-2.js', 'resources/js/app.js'])
 
 </head>
 
@@ -66,10 +58,13 @@
                     </a>
                     <div id="product" class="collapse {{ request()->routeIs('product.*') ? 'show' : '' }}">
                         <div class="py-2 collapse-inner rounded">
-                            <a class="collapse-item {{ request()->routeIs('product.index') ? 'active' : '' }}" href="{{ route('product.index') }}">View Product</a>
-                            <a class="collapse-item {{ request()->routeIs('product.add_product') ? 'active' : '' }}" href="{{ route('product.add_product') }}">Add Product</a>
+                            <a class="collapse-item {{ request()->routeIs('product.index') ? 'active' : '' }}"
+                                href="{{ route('product.index') }}">View Product</a>
+                            <a class="collapse-item {{ request()->routeIs('product.add_product') ? 'active' : '' }}"
+                                href="{{ route('product.add_product') }}">Add New Product</a>
                             @hasrole('admin')
-                            <a class="collapse-item {{ request()->routeIs('product.category') ? 'active' : '' }}" href="{{ route('product.category') }}">Category</a>
+                                <a class="collapse-item {{ request()->routeIs('product.category') ? 'active' : '' }}"
+                                    href="{{ route('product.category') }}">Add Category</a>
                             @endhasrole
                         </div>
                     </div>
@@ -77,21 +72,25 @@
 
                 <hr class="sidebar-divider d-none d-md-block">
                 @hasrole('admin')
-                <div class="sidebar-heading">Profile Management</div>
+                    <div class="sidebar-heading">Profile Management</div>
 
-                <li class="nav-item {{ request()->routeIs('profile.*') ? 'active' : '' }}">
-                    <a class="nav-link collapsed" href="#profile" data-bs-toggle="collapse"
-                        aria-expanded="{{ request()->routeIs('profile.*') ? 'true' : 'false' }}">
-                        <i class="fas fa-fw fa-folder"></i>
-                        <span>Profile</span>
-                    </a>
-                    <div id="profile" class="collapse {{ request()->routeIs('profile.*') ? 'show' : '' }}">
-                        <div class="py-2 collapse-inner rounded">
-                            <a class="collapse-item {{ request()->routeIs('profile.edit') ? 'active' : '' }}" href="{{ route('profile.edit') }}">Permission</a>
-                            <a class="collapse-item {{ request()->routeIs('profile.role') ? 'active' : '' }}" href="{{ route('profile.role') }}">Role</a>
+                    <li class="nav-item {{ request()->routeIs('profile.*') ? 'active' : '' }}">
+                        <a class="nav-link collapsed" href="#profile" data-bs-toggle="collapse"
+                            aria-expanded="{{ request()->routeIs('profile.*') ? 'true' : 'false' }}">
+                            <i class="fas fa-fw fa-folder"></i>
+                            <span>Profile</span>
+                        </a>
+                        <div id="profile" class="collapse {{ request()->routeIs('profile.*') ? 'show' : '' }}">
+                            <div class="py-2 collapse-inner rounded">
+                                <a class="collapse-item {{ request()->routeIs('profile.edit') ? 'active' : '' }}"
+                                    href="{{ route('profile.edit') }}">Permission</a>
+                                <a class="collapse-item {{ request()->routeIs('profile.role') ? 'active' : '' }}"
+                                    href="{{ route('profile.role') }}">Role</a>
+                                <a class="collapse-item {{ request()->routeIs('profile.product_setting') ? 'active' : '' }}"
+                                    href="{{ route('profile.product_setting') }}">Product Settings</a>
+                            </div>
                         </div>
-                    </div>
-                </li>
+                    </li>
                 @endhasrole
             </div>
         </ul>
@@ -195,7 +194,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
+                        <span>Copyright &copy; Your Website 2025</span>
                     </div>
                 </div>
             </footer>
@@ -205,12 +204,14 @@
             <i class="fas fa-angle-up"></i>
         </a>
 
-        <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         Select "Logout" below if you are ready to end your current session.
@@ -247,6 +248,8 @@
 
 
 </body>
+
+
 
 
 
