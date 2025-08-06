@@ -11,7 +11,7 @@
     <div class="container mt-5 col-lg-10 col-md-10 col-sm-6">
         <div class="row mb-4 pt-4">
             <div class="col-lg-12 col-md-10 col-sm-6">
-                <h1 class="h3">Product Settings</h1>
+                <h1 class="h3 text-gray-800">Product Settings</h1>
                 @if (session('success'))
                     <div class="alert alert-success alert-dismissible" role="alert">
                         {{ session('success') }}

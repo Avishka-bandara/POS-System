@@ -8,7 +8,7 @@
     <div class="container pt-4 col-lg-10 col-md-10 col-sm-6">
         <div class="row mb-4 pt-4">
             <div class="col-lg-12 col-md-10 col-sm-6">
-                <h1 class="h3">View Product</h1>
+                <h1 class="h3 text-gray-800">View Product</h1>
             </div>
         </div>
         <div class="row justify-content-center pb-5">
@@ -77,10 +77,10 @@
                 <h6 class="m-0 font-weight-bold text-primary">Products</h6>
             </div>
             <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <div class="table-responsive ">
+                    <table class="table table-bordered " id="dataTable" width="100%" cellspacing="0">
                         <thead>
-                            <tr>
+                            <tr class="text-center">
                                 <th>#</th>
                                 <th>Name</th>
                                 <th>Brand</th>

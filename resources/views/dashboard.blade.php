@@ -3,127 +3,126 @@
 @section('title', 'Dashboard')
 
 
-@vite(['resources/css/custom.scss', 'resources/js/app.js'])
+@vite(['resources/css/custom.scss', 'resources/js/app.js', 'resources/js/chart.js'])
 
 @section('content')
     <div class="container-fluid py-4">
         <!-- Filter Panel -->
         <!-- Quick Stats -->
-        <div class="card mb-4 ">
-            <div class="card-header bg-primary text-white mb-3">
+        {{-- <div class="card mb-4 "> --}}
+        {{-- <div class="card-header bg-primary text-white mb-3">
                 <h5 class="mb-0">Current Sales</h5>
+            </div> --}}
+        <div class="row">
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-bottom-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center m-1">
+                            <div class="col mr-2">
+                                <div class="text-s font-weight-bold text-primary text-uppercase mb-1"> Sales </div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ number_format($totalSales, 2) }}
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="row p-3">
-                <div class="col-xl-3 col-md-6 mb-4">
-                    <div class="card border-left-primary shadow h-100 py-2">
-                        <div class="card-body">
-                            <div class="row no-gutters align-items-center">
-                                <div class="col mr-2">
-                                    <div class="text-s font-weight-bold text-primary text-uppercase mb-1"> Sales </div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{ number_format($totalSales, 2) }}
-                                    </div>
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-bottom-success shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center m-1">
+                            <div class="col mr-2">
+                                <div class="text-s font-weight-bold text-success text-uppercase mb-1"> Total Orders
                                 </div>
-                                <div class="col-auto">
-                                    <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                                </div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $totalOrders }}</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-md-6 mb-4">
-                    <div class="card border-left-success shadow h-100 py-2">
-                        <div class="card-body">
-                            <div class="row no-gutters align-items-center">
-                                <div class="col mr-2">
-                                    <div class="text-s font-weight-bold text-success text-uppercase mb-1"> Total Orders
-                                    </div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $totalOrders }}</div>
-                                </div>
-                                <div class="col-auto">
-                                    <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                                </div>
+            </div>
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-bottom-warning shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center m-1">
+                            <div class="col mr-2">
+                                <div class="text-s font-weight-bold text-warning text-uppercase mb-1"> Products</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $totalProducts }}</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-md-6 mb-4">
-                    <div class="card border-left-success shadow h-100 py-2">
-                        <div class="card-body">
-                            <div class="row no-gutters align-items-center">
-                                <div class="col mr-2">
-                                    <div class="text-s font-weight-bold text-success text-uppercase mb-1"> Products</div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $totalProducts }}</div>
-                                </div>
-                                <div class="col-auto">
-                                    <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                                </div>
+            </div>
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-bottom-info shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center m-1">
+                            <div class="col mr-2">
+                                <div class="text-s font-weight-bold text-info text-uppercase mb-1"> Products</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-md-6 mb-4">
-                    <div class="card border-left-success shadow h-100 py-2">
-                        <div class="card-body">
-                            <div class="row no-gutters align-items-center">
-                                <div class="col mr-2">
-                                    <div class="text-s font-weight-bold text-success text-uppercase mb-1"> Products</div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
+            </div>
+        </div>
+        {{-- </div> --}}
+        <div class="row">
+            <div class="col-xl-12 col-lg-7">
+                <div class="card shadow mb-4">
+                    <!-- Card Header -->
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Revenue Overview</h6>
+                    </div>
+
+                    <!-- Card Body -->
+                    <div class="card-body">
+                        <div class="row align-items-center">
+                            <!-- Chart Area -->
+                            <div class="col-xl-11 col-lg-8">
+                                <div class="chart-area">
+                                    <canvas id="myAreaChart"></canvas>
                                 </div>
-                                <div class="col-auto">
-                                    <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                            </div>
+
+                            <!-- Filter Buttons (right side of chart) -->
+                            <div class="col-xl-1 col-lg-4 d-flex align-items-center">
+                                <div class="d-flex flex-column justify-content-center w-100">
+                                    <button type="button" class="btn btn-outline-primary btn-sm active mb-2 w-100"
+                                        data-filter="daily">Daily</button>
+                                    <button type="button" class="btn btn-outline-primary btn-sm mb-2 w-100"
+                                        data-filter="weekly">Weekly</button>
+                                    <button type="button" class="btn btn-outline-primary btn-sm mb-2 w-100"
+                                        data-filter="monthly">Monthly</button>
+                                    <button type="button" class="btn btn-outline-primary btn-sm mb-2 w-100"
+                                        data-filter="yearly">Yearly</button>
                                 </div>
                             </div>
                         </div>
+
+                        <hr>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="card mb-4">
-            <div class="card-header bg-primary text-white">
-                <h5 class="mb-0">Sales Filters</h5>
-            </div>
-            <div class="card-body">
-                <form id="filterForm" method="GET" action="{{ route('dashboard') }}">
-                    <div class="row">
-                        <div class="col-md-3 mb-3">
-                            <label for="date_range">Date Range</label>
-                            <input type="text" id="date_range" name="date_range" class="form-control">
-                        </div>
-                        <div class="col-md-3 mb-3">
-                            <label for="month">Month</label>
-                            <select id="month" name="month" class="form-control">
-                                <option value="">All</option>
-                                @for ($m = 1; $m <= 12; $m++)
-                                    <option value="{{ $m }}">
-                                        {{ DateTime::createFromFormat('!m', $m)->format('F') }}</option>
-                                @endfor
-                            </select>
-                        </div>
-                        <div class="col-md-3 mb-3">
-                            <label for="year">Year</label>
-                            <input type="number" id="year" name="year" class="form-control"
-                                placeholder="{{ date('Y') }}">
-                        </div>
-                        <div class="col-md-3 mb-3">
-                            <label for="product">Product</label>
-                            <select id="product" name="product" class="form-control">
-                                <option value="">All</option>
-                                @foreach ($products as $product)
-                                    <option value="{{ $product->id }}">{{ $product->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-success">Apply Filters</button>
-                </form>
-            </div>
-        </div>
+
 
 
         <!-- Sales Charts -->
         <div class="card mb-4">
             <div class="card-header">
-                <h5>Sales Overview</h5>
+                <h5>Need to Restock</h5>
             </div>
             <div class="card-body">
                 <canvas id="salesChart" height="120"></canvas>
@@ -185,34 +184,3 @@
 
     </div>
 @endsection
-
-@push('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        const ctx = document.getElementById('salesChart').getContext('2d');
-        const salesChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: {!! json_encode($chartLabels) !!},
-                datasets: [{
-                    label: 'Sales',
-                    data: {!! json_encode($chartData) !!},
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    fill: true,
-                    tension: 0.4,
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)'
-                }]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-
-        // Optional: use date picker (e.g., Flatpickr or jQuery UI)
-    </script>
-@endpush

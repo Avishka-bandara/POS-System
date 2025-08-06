@@ -10,7 +10,7 @@
 
 
     <div class="container pt-4 col-lg-10 col-md-10 col-sm-6">
-        <h4 class="mb-4">New Bill</h4>
+        <h4 class="mb-4 text-gray-800">New Bill</h4>
 
         <!-- Product Selection Row -->
         <form method="POST" id="productForm">
@@ -65,7 +65,6 @@
                                 <th class="text-end bill-heading payment">Payment:</th>
                                 <th class="bill-heading payment"><input id="payment" type="text" placeholder="LKR 0.00"
                                         required></th>
-
                                 <th class="text-end bill-heading balance">Balance:</th>
                                 <th id="balance" class="bill-heading balance">LKR 0.00</th>
                             </tr>
