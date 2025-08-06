@@ -7,12 +7,13 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\ProductSales;
 use App\Models\Sales;
+use Carbon\Carbon;
 
 class SalesController extends Controller
 {
     public function index()
     {
-        $products = Product::all();
+        $products = Product::where('action',1)->get();
         return view('sales.sales')->with('products', $products);
     }
 
@@ -21,6 +22,8 @@ class SalesController extends Controller
         // dd($request->all());
         $invoiceNumber = $this->generateInvoiceNumber();
         $items = $request->input('items');
+        $payment = $request->input('payment');
+        $balance = $request->input('balance');
 
         if (!$items || !is_array($items)) {
             return response()->json(['success' => false, 'message' => 'Invalid items.']);
@@ -50,13 +53,29 @@ class SalesController extends Controller
             $product->save();
         }
 
-        return response()->json(['success' => true, 'sale_id' => $sale->id, 'redirect' => route('sales.invoice', $sale->id)]);
+        return response()->json([
+        'success' => true,
+        'sale_id' => $sale->id,
+        'payment' => $payment,
+        'balance' => $balance,
+        ]);
     }
 
     public function invoice($id)
     {
-        $sale = Sales::with(['items.product'])->findOrFail($id);
-        return view('sales.invoice', compact('sale'));
+        $sale = ProductSales::where('sale_id', $id)
+            ->with(['product'])
+            ->get();
+
+        $date = Carbon::now();
+
+            if (!$sale) {
+                return redirect()->back()->with('error', 'Sale not found or no items associated with this sale.');
+            }
+        // $payment = request()->query('payment');
+        // $balance = request()->query('balance');
+        // return view('sales.invoice', compact('sale'));
+        return view('sales.invoice', compact('sale', 'date'));
     }
 
     public function generateInvoiceNumber()

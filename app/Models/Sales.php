@@ -12,8 +12,10 @@ class Sales extends Model
     protected $table = 'sales';
     protected $fillable = [
         'invoice_number',
-        'customer_id',
+        // 'customer_id',
         'grand_total',
+        'created_at',
+        'updated_at',
     ];
 
     public function items()

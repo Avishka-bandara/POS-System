@@ -6,6 +6,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\SalesController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -40,4 +41,12 @@ Route::post('/store-roles-permissions', [RolePermissionController::class, 'Roles
 Route::get('/fetch-users', [UserController::class, 'show'])->name('fetch.users');
 Route::get('/get-users/{id}', [UserController::class, 'getUser'])->name('get.user');
 Route::post('/delete-users/{id}', [UserController::class, 'destroy'])->name('delete.user');
+
+
+
+ Route::get('/invoice/{id}', [SalesController::class, 'invoice'])->name('sales.invoice');
+
+
+
+
 
