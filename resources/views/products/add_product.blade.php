@@ -41,11 +41,24 @@
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                     <label for="size" class="form-label">Size</label>
-                                    <input type="text" class="form-control" id="size" name="size"
+                                    {{-- <input type="text" class="form-control" id="size" name="size"
                                         value="{{ old('size') }}">
                                     @error('size')
                                         <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
+                                    @enderror --}}
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" id="size" name="size"
+                                            value="{{ old('size') }}" placeholder="Enter size">
+                                        <select class="form-select col-lg-3" id="unit" name="unit" required>
+                                            <option value="" disabled selected>Select Unit</option>
+                                            @foreach ($measurementUnits as $unit)
+                                                <option value="{{ $unit->id }}">{{ $unit->name }}-
+                                                    <strong>{{ $unit->symbol }}</strong>
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
                                 </div>
 
                                 <div class="col-md-6">

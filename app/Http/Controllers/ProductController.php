@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category; 
+use App\Models\MeasurementUnit;
 
 class ProductController extends Controller
 {
@@ -32,7 +33,8 @@ class ProductController extends Controller
     public function addProduct()
     {
         $categories = Category::select('id', 'name')->get();
-        return view ('products.add_product', ['categories' => $categories]);
+        $measurementUnits = MeasurementUnit::select('id', 'name', 'symbol')->get();
+        return view ('products.add_product', ['categories' => $categories, 'measurementUnits' => $measurementUnits]);
     }
 
     public function addCategory(){
