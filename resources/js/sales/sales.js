@@ -155,16 +155,16 @@ $(document).ready(function(){
         const left = (screen.width - popupWidth) / 2;
         const top = (screen.height - popupHeight) / 2;
 
-        // window.open(
-        //     url,
-        //     '_blank',
-        //     `width=${popupWidth},height=${popupHeight},left=${left},top=${top}`
-        // );
+        window.open(
+            url,
+            '_blank',
+            `width=${popupWidth},height=${popupHeight},left=${left},top=${top}`
+        );
 
-        // Optional: refresh or reset after short delay
-        // setTimeout(() => {
-        //     location.reload(); // or resetCart(); your logic
-        // }, 1000);
+        Optional: refresh or reset after short delay
+        setTimeout(() => {
+            location.reload(); // or resetCart(); your logic
+        }, 1000);
     }
     
     
