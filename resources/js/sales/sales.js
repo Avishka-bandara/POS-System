@@ -42,19 +42,16 @@ let Balance = 0;
 let billItems = [];
 let counter = 1;
 
-document.getElementById('productForm').addEventListener('submit', function (e) {
-    e.preventDefault();
-
+document.getElementById('addProductBtn').addEventListener('click', function () {
     const productSelect = document.getElementById('productItem');
     const quantityInput = document.getElementById('quantity');
 
     const productId = productSelect.value;
-    const productText = productSelect.options[productSelect.selectedIndex].text;
+    const productText = productSelect.options[productSelect.selectedIndex]?.text;
     const quantity = parseInt(quantityInput.value);
 
     if (!productId || quantity <= 0) return;
 
-    // Extract price from product text (assumes ' - LKR(price)' format)
     const priceMatch = productText.match(/LKR\((\d+(\.\d+)?)\)/);
     const price = priceMatch ? parseFloat(priceMatch[1]) : 0;
     const total = (price * quantity).toFixed(2);
@@ -62,19 +59,19 @@ document.getElementById('productForm').addEventListener('submit', function (e) {
     billItems.push({ id: productId, name: productText, quantity, price, total });
     renderBill();
 
-    // console.log('billItems:', billItems);
-    
-
     // Reset inputs
     quantityInput.value = '';
     productSelect.selectedIndex = 0;
 });
+
 
 function renderBill() {
     const tbody = document.getElementById('billBody');
     const grandTotalField = document.getElementById('grandTotal');
     tbody.innerHTML = '';
     let grandTotal = 0;
+    let paid = 0;
+    let balance = 0;
 
     billItems.forEach((item, index) => {
         grandTotal += parseFloat(item.total);
@@ -91,13 +88,15 @@ function renderBill() {
     });
 
     grandTotalField.textContent = 'LKR ' + grandTotal.toFixed(2);
+    paid = parseFloat(document.getElementById('payment').value) || 0;
+    balance = paid - grandTotal;
 
-    total = grandTotal; 
+    total = grandTotal;
 
 }
 
-$(document).ready(function(){
-    $('#finalizeSale').on('click', function(){
+$(document).ready(function () {
+    $('#finalizeSale').on('click', function () {
 
         const payment = parseFloat($('#payment').val());
 
@@ -105,40 +104,59 @@ $(document).ready(function(){
         console.log('Payment amount:', payment);
         console.log('Balance amount:', Balance);
 
+        if (isNaN(payment) || payment < 0 || payment < total) {
+            toastr.error('Invalid payment amount.');
+            return;
+        }
+        if (isNaN(Balance) || Balance < 0) {
+            toastr.error('Balance calculation error.');
+            return;
+        }
         if (billItems.length === 0) {
             toastr.error('No items in the bill.');
             return;
         }
 
         // Optional confirmation
-        if (!confirm("Do you want to finalize this sale and print the bill?")) return;
+        Swal.fire({
+            title: 'Finalize Sale?',
+            text: "Do you want to finalize this sale and print the bill?",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, finalize',
+            cancelButtonText: 'No'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: '/sales/submit',
+                    method: 'POST',
+                    data: {
+                        items: billItems,
+                        payment: payment,
+                        balance: Balance,
+                        _token: $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            // toastr.success('Purchase successful!');
+                            console.log(response.sale_id);
+                            printInvoice(response.sale_id, response.payment, response.balance);
 
-        
-        $.ajax({
-            url: '/sales/submit',
-            method: 'POST',
-            data: {
-                items: billItems,
-                payment: payment,
-                balance: Balance,
-                _token: $('meta[name="csrf-token"]').attr('content')
-            },
-            success: function(response) {
-                if (response.success) {
-                    // toastr.success('Purchase successful!');
-                    console.log(response.sale_id);
-                    printInvoice(response.sale_id, response.payment, response.balance);
-
-                } else {
-                    toastr.error('Failed to save purchase.');
-                }
-            },
-            error: function(xhr) {
-                console.error(xhr.responseText);
-                toastr.error('Something went wrong.');
+                        } else {
+                            toastr.error('Failed to save purchase.');
+                        }
+                    },
+                    error: function (xhr) {
+                        console.error(xhr.responseText);
+                        toastr.error('Something went wrong.');
+                    }
+                })
             }
-        })
-                        
+        });
+
+
+
+
 
     });
 
@@ -146,7 +164,7 @@ $(document).ready(function(){
 
     function printInvoice(saleID, payment, balance) {
 
-        
+
 
         const url = `/api/invoice/${saleID}`;
 
@@ -161,13 +179,12 @@ $(document).ready(function(){
             `width=${popupWidth},height=${popupHeight},left=${left},top=${top}`
         );
 
-        Optional: refresh or reset after short delay
         setTimeout(() => {
             location.reload(); // or resetCart(); your logic
         }, 1000);
     }
-    
-    
+
+
 
 })
 
@@ -178,7 +195,7 @@ $(document).ready(function(){
 //         toastr.error('No items in the bill.');
 //         return;
 //     }
-    
+
 //     // Optional confirmation
 //     if (!confirm("Do you want to finalize this sale and print the bill?")) return;
 
@@ -310,7 +327,7 @@ quantityInput.addEventListener('input', function () {
 
 
 
-document.getElementById('payment').addEventListener('change', function(){
+document.getElementById('payment').addEventListener('change', function () {
     const payment = parseInt(this.value);
     const balance = document.getElementById('balance');
 
@@ -321,12 +338,12 @@ document.getElementById('payment').addEventListener('change', function(){
         toastr.error('Invalid payment amount.');
         return;
     }
-    else{
+    else {
         Balance = payment - total;
         balance.textContent = 'LKR ' + (payment - total);
         // location.reload();
     }
-        
-    
-    
+
+
+
 })

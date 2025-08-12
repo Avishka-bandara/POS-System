@@ -170,6 +170,14 @@
             <span>Total:</span>
             <span>Rs. {{ number_format($sale->first()->sale->grand_total, 2) }}</span>
         </div>
+        <div class="row bold">
+            <span>Paid:</span>
+            <span>Rs. {{ number_format($sale->first()->sale->paid, 2) }}</span>
+        </div>
+        <div class="row bold">
+            <span>Balance:</span>
+            <span>Rs. {{ number_format($sale->first()->sale->balance, 2) }}</span>
+        </div>
     </div>
 
     <div class="center thankyou">Thank you! Come again!</div>
