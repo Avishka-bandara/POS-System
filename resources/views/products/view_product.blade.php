@@ -102,19 +102,10 @@
     </div>
 
 
-@endsection
 
 
 
 
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    @vite(['resources/js/app.js', 'resources/css/custom.scss'])
-</head>
-
-<body>
 
     <!-- Offcanvas Drawer -->
     <div id="editDrawer" class="offcanvas offcanvas-end" aria-labelledby="editDrawerLabel">
@@ -135,16 +126,16 @@
                     <input type="text" class="form-control" id="BrandName" name="BrandName" disabled>
                 </div>
                 <div class="mb-3">
-                    <label for="quantity" class="form-label">quantity</label>
-                    <input type="text" class="form-control" id="quantity" name="quantity" required>
+                    <label for="Quantity" class="form-label">Quantity</label>
+                    <input type="text" class="form-control" id="Quantity" name="Quantity" required>
                 </div>
                 <div class="mb-3">
-                    <label for="expire_date" class="form-label">Expire Date</label>
-                    <input type="date" class="form-control" id="expire_date" name="expire_date" required>
+                    <label for="ExpireDate" class="form-label">Expire Date</label>
+                    <input type="date" class="form-control" id="ExpireDate" name="ExpireDate" required>
                 </div>
                 <div class="mb-3">
-                    <label for="price" class="form-label">Price</label>
-                    <input type="text" class="form-control" id="price" name="price" required>
+                    <label for="Price" class="form-label">Price</label>
+                    <input type="text" class="form-control" id="Price" name="Price" required>
                 </div>
                 <div class="mb-3">
                     <label for="Category" class="form-label">Category</label>
@@ -159,6 +150,5 @@
     </div>
 
 
-</body>
+@endsection
 
-</html>

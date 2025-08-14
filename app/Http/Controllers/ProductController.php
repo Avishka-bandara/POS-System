@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
-use App\Models\Category; 
+use App\Models\Category;
 use App\Models\MeasurementUnit;
 
 class ProductController extends Controller
@@ -34,10 +34,11 @@ class ProductController extends Controller
     {
         $categories = Category::select('id', 'name')->get();
         $measurementUnits = MeasurementUnit::select('id', 'name', 'symbol')->get();
-        return view ('products.add_product', ['categories' => $categories, 'measurementUnits' => $measurementUnits]);
+        return view('products.add_product', ['categories' => $categories, 'measurementUnits' => $measurementUnits]);
     }
 
-    public function addCategory(){
+    public function addCategory()
+    {
         return view('products.add_catergory');
     }
 
@@ -45,30 +46,31 @@ class ProductController extends Controller
     public function addCategorySave(Request $request)
     {
 
-    //    $validator = Validator::make($request->all(), [
-    //         'categoryName' => 'required|string|max:255',
-    //     ]);
-    //     if ($validator->fails()) {
-    //         return response()->json(['error' => $validator->errors()], 422);
-    //     }
+        //    $validator = Validator::make($request->all(), [
+        //         'categoryName' => 'required|string|max:255',
+        //     ]);
+        //     if ($validator->fails()) {
+        //         return response()->json(['error' => $validator->errors()], 422);
+        //     }
 
         $category = Category::where('name', $request->input('categoryName'))->first();
-        if($category) {
+        if ($category) {
             return response()->json(['error' => 'Category already exists.'], 422);
         }
 
         Category::create([
             'name' => $request->input('categoryName'),
         ]);
-        return response()->json(['success' => 'Category added successfully.'],200);
+        return response()->json(['success' => 'Category added successfully.'], 200);
     }
 
-    public function fetchCategories(){
-         $categories = Category::select('id', 'name')->get();
+    public function fetchCategories()
+    {
+        $categories = Category::select('id', 'name')->get();
         return response()->json(['data' => $categories]);
     }
 
-    
+
     public function updateCategory(Request $request)
     {
         $category = Category::find($request->input('id'));
@@ -97,13 +99,13 @@ class ProductController extends Controller
     }
 
 
-    
+
 
 
     public function addNewProductSave(Request $request)
     {
-    //    dd($request->all());
-    
+        //    dd($request->all());
+
         Product::create([
             'name' => $request->input('productName'),
             'brand' => $request->input('brand'),
@@ -122,7 +124,7 @@ class ProductController extends Controller
     {
         $productName = $request->input('productName');
         $brand = $request->input('brandName');
-        
+
         $productDetail = Product::with('category')
             ->where('name', 'like', '%' . $productName . '%')
             ->where('brand', 'like', '%' . $brand . '%')
@@ -131,35 +133,38 @@ class ProductController extends Controller
 
         return response()->json([
             'message' => 'Search completed successfully.',
-            'data' => $productDetail 
+            'data' => $productDetail
         ]);
     }
 
 
-    public function updateProduct(Request $request) {
+    public function updateProduct(Request $request)
+    {
         // dd($id);
         $productId = $request->input('id');
         $product = Product::find($productId);
-        if(!$product) {
+        if (!$product) {
             return response()->json(['error' => 'Product not found.'], 404);
         }
-        $product->quantity = $request->input('quantity');
-        $product->exp_date = $request->input('expire_date');
-        $product->price = $request->input('price');
-        $product->save();
+        $product->update([
+            'quantity' => $request->input('Quantity'),
+            'exp_date' => $request->input('ExpireDate'),
+            'price'    => $request->input('Price'),
+        ]);
 
         return redirect()->back()->with('success', 'Product updated successfully.');
     }
 
 
-    public function productSettingindex(){
+    public function productSettingindex()
+    {
         $products = Product::with('category')
-        ->where('action', 0)
-        ->get();
+            ->where('action', 0)
+            ->get();
         return view('profile.product_setting', ['products' => $products]);
-        
     }
-    public function activateProduct($id){
+    public function activateProduct($id)
+    {
         $product = Product::find($id);
         if (!$product) {
             return response()->json(['error' => 'Product not found.'], 404);
