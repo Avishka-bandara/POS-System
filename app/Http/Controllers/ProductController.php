@@ -116,6 +116,7 @@ class ProductController extends Controller
             'exp_date' => $request->input('expiryDate'),
             'price' => $request->input('price'),
             'category_id' => $request->input('category_id'),
+            'measurement_unit_id' => $request->input('measurement_unit')
         ]);
 
         return response()->json(['success' => 'Product added successfully.']);
@@ -131,6 +132,7 @@ class ProductController extends Controller
             $productDetail = Product::with('category')
                 ->where('name', $productName)
                 ->where('brand', $brand)
+                ->where('action', 1)
                 ->get();
         } else {
             $productDetail = collect();
@@ -180,5 +182,18 @@ class ProductController extends Controller
         $product->save();
 
         return response()->json(['success' => 'Product activated successfully.']);
+    }
+
+
+    public function disableProduct($id){
+        $product = Product::find($id);
+        if (!$product) {
+            return response()->json(['error' => 'Product not found.'], 404);
+        }
+
+        $product->action = 0;
+        $product->save();
+
+        return response()->json(['success' => 'Product disabled successfully.'], 200);
     }
 }

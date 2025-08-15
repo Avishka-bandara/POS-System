@@ -1,4 +1,5 @@
 import $ from "jquery";
+import toastr from "toastr";
 
 
 $(document).ready(function () {
@@ -26,7 +27,7 @@ $(document).ready(function () {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
             success: function (response) {
-                console.log("Success:", response);
+                // console.log("Success:", response);
                 fetchDetails(response.data);
                 // You can now display a success message or update the DOM
                 // console.log('Product updated successfully:', response);
@@ -39,6 +40,34 @@ $(document).ready(function () {
 
 
     autoSubmitIfFilled();
+
+
+    $("#disableProductBtn").on('click', function (){
+        
+        const ProductID = $('#CategoryId').val();
+        console.log(ProductID);
+
+        const url = '/api/product/disable-product/' + ProductID;
+
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            success:function(response){
+                toastr.success(response.success);
+                setTimeout(() => {
+                    location.reload();
+                }, 3000);
+            },
+            error:function(xhr, status, error){
+                toastr.error(xhr.responseJSON.error);
+            }
+
+        })
+    })
 
 });
 
