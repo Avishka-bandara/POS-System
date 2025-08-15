@@ -22,6 +22,7 @@ class DashboardController extends Controller
         // $totalCustomers = Customer::count();
         $topProducts = Product::withCount('sales')->orderByDesc('sales_count')->take(5)->get();
         $recentSales = Sales::latest()->take(10)->get();
+        $needToRestock = Product::where('quantity', '<=', 5)->get();
 
         $chartLabels = []; // e.g. dates or months
         $chartData = []; // corresponding sales numbers
@@ -35,7 +36,8 @@ class DashboardController extends Controller
             'topProducts',
             'recentSales',
             'chartLabels',
-            'chartData'
+            'chartData',
+            'needToRestock'
         ));
     }
 }
