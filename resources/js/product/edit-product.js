@@ -2,6 +2,15 @@ import $ from "jquery";
 
 
 $(document).ready(function () {
+    function autoSubmitIfFilled() {
+        console.log("Name: " + document.getElementById('productName').value.trim());
+        console.log("Brand: " + document.getElementById('brandName').value.trim());
+        if (document.getElementById('productName').value.trim() !== '' && document.getElementById('brandName').value.trim() !== '') {
+            $("#editProductForm").trigger("submit");
+        }
+
+    }
+
     $("#editProductForm").on("submit", function (e) {
         e.preventDefault();
 
@@ -29,8 +38,7 @@ $(document).ready(function () {
     });
 
 
-    
-   
+    autoSubmitIfFilled();
 
 });
 
@@ -89,3 +97,4 @@ $(document).on("click", ".edit-category", function () {
     $("#ExpireDate").val($(this).data("exp_date"));
     $("#Price").val($(this).data("price"));
 });
+

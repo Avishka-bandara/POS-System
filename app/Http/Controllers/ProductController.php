@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\MeasurementUnit;
+use Illuminate\Container\Attributes\Log;
+use Illuminate\Support\Facades\Log as FacadesLog;
 
 class ProductController extends Controller
 {
@@ -125,11 +127,15 @@ class ProductController extends Controller
         $productName = $request->input('productName');
         $brand = $request->input('brandName');
 
-        $productDetail = Product::with('category')
-            ->where('name', 'like', '%' . $productName . '%')
-            ->where('brand', 'like', '%' . $brand . '%')
-            ->get();
-
+        if ($productName && $brand) {
+            $productDetail = Product::with('category')
+                ->where('name', $productName)
+                ->where('brand', $brand)
+                ->get();
+        } else {
+            $productDetail = collect();
+        }
+     
 
         return response()->json([
             'message' => 'Search completed successfully.',

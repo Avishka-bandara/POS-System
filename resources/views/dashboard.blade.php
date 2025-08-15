@@ -118,7 +118,7 @@
                         class="text-decoration-none">
                         {{ $product->name }}
                     </a>
-                    <span class="badge bg-primary rounded-pill">{{ $product->sales_count }}</span>
+                    <span class="badge bg-danger rounded-pill">{{ $product->quantity }}</span>
                 </li>
                 @endforeach
             </ul>

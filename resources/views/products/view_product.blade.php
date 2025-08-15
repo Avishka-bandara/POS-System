@@ -55,20 +55,20 @@
                                     <datalist id="productList">
                                         {{-- @foreach ($products as $product)
                                             <option value="{{ $product->name }} ({{ $product->brand }}) - ${{ number_format($product->price, 2) }}">
-                        @endforeach
-                        </datalist>
-                </div>
+                                    @endforeach
+                                    </datalist>
+                            </div>
 
-            </div> --}}
+                        </div> --}}
 
 
 
-            <div class="text-start mt-5">
-                <button type="submit" class="btn btn-success col-3">
-                    <i class="fas fa-plus-circle me-1"></i> Search
-                </button>
-            </div>
-            </form>
+                        <div class="text-start mt-5">
+                            <button type="submit" class="btn btn-success col-3">
+                                <i class="fas fa-plus-circle me-1"></i> Search
+                            </button>
+                        </div>
+                    </form>
 
         </div>
     </div>
