@@ -22,26 +22,29 @@
                                 <div class="col-md-6">
                                     <label for="productName" class="form-label">Product Name</label>
                                     <select class="form-control select2" id="productName" name="productName">
-                                        <option disabled selected>Select Product</option>
+                                        <option disabled {{ request('name') ? '' : 'selected' }}>Select Product</option>
                                         @foreach ($uniqueProductNames as $product)
-                                            <option value="{{ $product->name }}">
+                                            <option value="{{ $product->name }}"
+                                                {{ request('name') === $product->name ? 'selected' : '' }}>
                                                 {{ $product->name }} - {{ $product->category->name }}
                                             </option>
                                         @endforeach
                                     </select>
+
                                 </div>
 
                                 <div class="col-md-6">
                                     <label for="brandName" class="form-label">Brand Name</label>
-                                    <select type="text" class="form-control" id="brandName"
-                                        placeholder="Type to search..." name="brandName">
-                                        <option disabled selected>Brand</option>
+                                    <select type="text" class="form-control" id="brandName" name="brandName">
+                                        <option disabled {{ request('brand') ? '' : 'selected' }}>Brand</option>
                                         @foreach ($uniqueBrandNames as $BrandName)
-                                            <option value="{{ $BrandName->brand }}">
+                                            <option value="{{ $BrandName->brand }}"
+                                                {{ request('brand') === $BrandName->brand ? 'selected' : '' }}>
                                                 {{ $BrandName->brand }}
                                             </option>
                                         @endforeach
                                     </select>
+
                                 </div>
                             </div>
                             {{-- <div class="row mb-3">
@@ -52,11 +55,11 @@
                                     <datalist id="productList">
                                         {{-- @foreach ($products as $product)
                                             <option value="{{ $product->name }} ({{ $product->brand }}) - ${{ number_format($product->price, 2) }}">
-                                        @endforeach 
+                                    @endforeach
                                     </datalist>
-                                </div>
+                            </div>
 
-                            </div> --}}
+                        </div> --}}
 
 
 
@@ -102,19 +105,10 @@
     </div>
 
 
-@endsection
 
 
 
 
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    @vite(['resources/js/app.js', 'resources/css/custom.scss'])
-</head>
-
-<body>
 
     <!-- Offcanvas Drawer -->
     <div id="editDrawer" class="offcanvas offcanvas-end" aria-labelledby="editDrawerLabel">
@@ -135,16 +129,16 @@
                     <input type="text" class="form-control" id="BrandName" name="BrandName" disabled>
                 </div>
                 <div class="mb-3">
-                    <label for="quantity" class="form-label">quantity</label>
-                    <input type="text" class="form-control" id="quantity" name="quantity" required>
+                    <label for="Quantity" class="form-label">Quantity</label>
+                    <input type="text" class="form-control" id="Quantity" name="Quantity" required>
                 </div>
                 <div class="mb-3">
-                    <label for="expire_date" class="form-label">Expire Date</label>
-                    <input type="date" class="form-control" id="expire_date" name="expire_date" required>
+                    <label for="ExpireDate" class="form-label">Expire Date</label>
+                    <input type="date" class="form-control" id="ExpireDate" name="ExpireDate" required>
                 </div>
                 <div class="mb-3">
-                    <label for="price" class="form-label">Price</label>
-                    <input type="text" class="form-control" id="price" name="price" required>
+                    <label for="Price" class="form-label">Price</label>
+                    <input type="text" class="form-control" id="Price" name="Price" required>
                 </div>
                 <div class="mb-3">
                     <label for="Category" class="form-label">Category</label>
@@ -152,13 +146,11 @@
                 </div>
                 <button type="submit" class="btn btn-success" data-bs-dismiss="offcanvas"
                     aria-label="Close">Update</button>
-                <button type="reset" class="btn btn-danger" data-bs-dismiss="offcanvas"
+                <button type="button" class="btn btn-danger" id="disableProductBtn" data-bs-dismiss="offcanvas"
                     aria-label="Close">Disable</button>
             </form>
         </div>
     </div>
 
 
-</body>
-
-</html>
+@endsection

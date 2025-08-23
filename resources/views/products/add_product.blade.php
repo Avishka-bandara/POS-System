@@ -49,10 +49,11 @@
                                     <div class="input-group mb-3">
                                         <input type="text" class="form-control" id="size" name="size"
                                             value="{{ old('size') }}" placeholder="Enter size">
-                                        <select class="form-select col-lg-3" id="unit" name="unit" required>
+                                        <select class="form-select col-lg-3" id="measurement_unit" name="measurement_unit"
+                                            required>
                                             <option value="" disabled selected>Select Unit</option>
                                             @foreach ($measurementUnits as $unit)
-                                                <option value="{{ $unit->id }}">{{ $unit->name }}-
+                                                <option value="{{ $unit->id }}">
                                                     <strong>{{ $unit->symbol }}</strong>
                                                 </option>
                                             @endforeach

@@ -21,6 +21,7 @@ Route::post('/update-category', [ProductController::class, 'updateCategory'])->n
 Route::post('/delete-category/{id}', [ProductController::class, 'deleteCategory'])->name('delete.category');
 Route::post('/product/update', [ProductController::class, 'updateProduct'])->name('product.update');
 Route::post('product/activate/{id}', [ProductController::class, 'activateProduct'])->name('product.activate');
+Route::post('product/disable-product/{id}', [ProductController::class, 'disableProduct'])->name('product.disable');
 
 
 

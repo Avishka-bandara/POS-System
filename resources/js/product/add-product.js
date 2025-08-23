@@ -10,7 +10,7 @@ $(document).ready(function(){
 
         const formData = $(this);
         const url = formData.attr('action');
-        // console.log(formData.serialize());
+        console.log(formData.serialize());
         
         $.ajax({
             type: 'POST',

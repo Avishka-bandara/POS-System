@@ -14,6 +14,8 @@ class Sales extends Model
         'invoice_number',
         // 'customer_id',
         'grand_total',
+        'paid',
+        'balance',
         'created_at',
         'updated_at',
     ];

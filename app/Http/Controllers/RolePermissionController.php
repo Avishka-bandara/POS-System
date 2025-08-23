@@ -27,7 +27,6 @@ class RolePermissionController extends Controller
 
     public function RolesPermissions(Request $request)
     {
-        dd($request->all());
 
         if (!$request->role_id) {
             return redirect()->back()->with('error', 'Please select a role.');

@@ -32,6 +32,8 @@ class SalesController extends Controller
         $sale = Sales::create([
             'grand_total' => array_sum(array_column($items, 'total')),
             'invoice_number' => $invoiceNumber,
+            'paid' => $payment,
+            'balance' => $balance,
             // 'customer_id' => $request->input('customer_id', null),
         ]);
 
