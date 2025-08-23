@@ -27,7 +27,7 @@
                 <div class="col-lg-12 col-md-10 col-sm-6">
                     <div class="card shadow">
                         <div class="card-body">
-                            <form action="#" method="POST" id="editProductForm">
+                            <form  method="POST" id="editProductForm">
                                 @csrf
                                 <div class="row mb-3">
                                     <div class="col-auto">
@@ -46,7 +46,7 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <button type="submit" class="btn btn-primary">Update Settings</button>
+                                    <button type="button" id="updateSettingsBtn" class="btn btn-primary">Update Settings</button>
                                 </div>
                             </form>
                         </div>

@@ -8,8 +8,9 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\MeasurementUnit;
-use Illuminate\Container\Attributes\Log;
-use Illuminate\Support\Facades\Log as FacadesLog;
+use App\Models\Setting;
+
+use Illuminate\Support\Facades\Log;
 
 class ProductController extends Controller
 {
@@ -137,7 +138,7 @@ class ProductController extends Controller
         } else {
             $productDetail = collect();
         }
-     
+
 
         return response()->json([
             'message' => 'Search completed successfully.',
@@ -185,7 +186,8 @@ class ProductController extends Controller
     }
 
 
-    public function disableProduct($id){
+    public function disableProduct($id)
+    {
         $product = Product::find($id);
         if (!$product) {
             return response()->json(['error' => 'Product not found.'], 404);
@@ -195,5 +197,19 @@ class ProductController extends Controller
         $product->save();
 
         return response()->json(['success' => 'Product disabled successfully.'], 200);
+    }
+
+    public function updateSettings(Request $request)
+    {   
+        Log::info('Update settings request received', ['request' => $request->all()]);
+        $request->validate([
+            'warning-level' => 'required|numeric|min:0',
+            'tax' => 'required|numeric|min:0',
+        ]);
+
+        Setting::set('warning_level', $request->input('warning-level'));
+        Setting::set('tax', $request->input('tax'));
+
+        return ['success' => 'Settings updated successfully.'];
     }
 }
