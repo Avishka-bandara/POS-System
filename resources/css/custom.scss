@@ -3,6 +3,33 @@
 @use 'flatpickr/dist/flatpickr.min.css';
 
 
+@keyframes lowStockAnimation {
+  0% {
+    color: #ff4d4d; /* red */
+    text-shadow: 0 0 5px #ff4d4d;
+  }
+  25% {
+    color: #ff1a1a;
+    text-shadow: 0 0 10px #ff1a1a;
+  }
+  50% {
+    color: #ff3333;
+    text-shadow: 0 0 15px #ff3333;
+  }
+  75% {
+    color: #ff1a1a;
+    text-shadow: 0 0 10px #ff1a1a;
+  }
+  100% {
+    color: #ff4d4d;
+    text-shadow: 0 0 5px #ff4d4d;
+  }
+}
+
+.low-stock {
+  font-weight: bold;
+  animation: lowStockAnimation 1.5s ease-in-out infinite;
+}
 
 
 $primary: #4e73df;

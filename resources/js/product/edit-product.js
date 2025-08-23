@@ -83,12 +83,13 @@ function fetchDetails(products) {
     }
 
     products.forEach((product, index) => {
+        let quantityClass = product.quantity < 5 ? 'low-stock' : '';
         const row = `
             <tr>
                 <td>${index + 1}</td>
                 <td>${product.name}</td>
                 <td>${product.brand}</td>
-                <td>${product.quantity}</td>
+                <td class="${quantityClass}">${product.quantity}</td>
                 <td>${product.size} g</td>
                 <td>${product.exp_date}</td>
                 <td>${Number(product.price).toLocaleString("en-LK", { style: "currency", currency: "LKR" })}</td>

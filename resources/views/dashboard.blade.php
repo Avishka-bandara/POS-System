@@ -154,7 +154,7 @@
                     <tr>
                         <th scope="col">#</th>
                         <th>Invoice</th>
-                        <th>Customer</th>
+                        <!-- <th>Customer</th> -->
                         <th>Total</th>
                         <th>Date</th>
                         <th>Actions</th>
@@ -165,7 +165,7 @@
                     <tr>
                         <th scope="row">{{ $sale->id }}</th>
                         <td>{{ $sale->invoice_number }}</td>
-                        <td>{{ $sale->customer_name }}</td>
+                        <!-- <td>{{ $sale->customer_name }}</td> -->
                         <td>Rs {{ number_format($sale->grand_total, 2) }}</td>
                         <td>{{ $sale->created_at->format('Y-m-d') }}</td>
                         <td>
