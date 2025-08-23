@@ -6,6 +6,14 @@
 @vite(['resources/css/custom.scss', 'resources/js/app.js', 'resources/js/chart.js'])
 
 @section('content')
+<script>
+    window.dashboardData = {
+        chartLabels: @json($chartLabels),
+        chartData: @json($chartData),
+        chartUrl: "{{ route('dashboard.chartData') }}"
+    };
+</script>
+
 <div class="container-fluid py-4">
     <!-- Filter Panel -->
     <!-- Quick Stats -->
